@@ -12,7 +12,7 @@
 // fork和exec搭配使用
 
 // 使用重定向技术，打开文件
-
+/**/
 int main(int argc, char *argv[])
 {
 	int rc = fork();
