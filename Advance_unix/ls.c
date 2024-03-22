@@ -1,7 +1,3 @@
-//
-// Created by wyh on 2024/3/22.
-//
-
 // ls命令的实现
 
 #include "apue.h"
