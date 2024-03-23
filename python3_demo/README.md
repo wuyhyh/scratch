@@ -1,1 +1,5 @@
 这里是一些python3的玩具代码
+
+python_4_leetcode目录下存放了基本的做算法题需要知道的python programming tricks
+
+leetcode_day中存放了一些leetcode problem solving methods
