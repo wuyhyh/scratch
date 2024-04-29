@@ -7,7 +7,7 @@
 #ifndef APUE_H
 #define APUE_H
 
-#define _POSIX_C_SOURCE 200809L
+#define _POSIX_C_SOURCE 200809L // limitation
 
 #include <sys/types.h> // some system still need this
 #include <sys/stat.h>
