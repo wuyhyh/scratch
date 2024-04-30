@@ -1,10 +1,10 @@
-#include<stdio.h>
-#include<stdbool.h>
-#include<stdlib.h>
+#include <stdio.h>
+#include <stdbool.h>
+#include <stdlib.h>
 
-typedef char* elemtype;
+typedef char *elemtype;
 
-typedef struct AVLnode* ptr_to_AVLnode;
+typedef struct AVLnode *ptr_to_AVLnode;
 struct AVLnode {
 	elemtype data;
 	ptr_to_AVLnode left;
@@ -38,8 +38,7 @@ int get_height(AVLtree T)
 		hr = get_height(T->right);
 		maxh = max_one(hl, hr);
 		return maxh + 1;
-	}
-	else
+	} else
 		return 0;
 }
 
@@ -83,26 +82,27 @@ AVLtree insert_AVLtree(AVLtree T, elemtype e)
 		T->left = T->right = NULL;
 		T->height = 1;
 		return T;
-	}
-	else {
+	} else {
 		if (e < T->data) {
 			T->left = insert_AVLtree(T->left, e);
-			if ((get_height(T->left) - get_height(T->right)) == 2) {//如果需要左旋
+			if ((get_height(T->left) - get_height(T->right)) ==
+			    2) { //如果需要左旋
 				if (e < T->left->data)
 					T = single_left_rotation(T);
 				else
 					T = double_left_right_rotation(T);
 			}
-		}//左子树插入结束
+		} //左子树插入结束
 		else if (e > T->data) {
 			T->right = insert_AVLtree(T->right, e);
-			if ((get_height(T->left) - get_height(T->right)) == -2) {//如果需要右旋
+			if ((get_height(T->left) - get_height(T->right)) ==
+			    -2) { //如果需要右旋
 				if (e > T->right->data)
 					T = single_right_rotation(T);
 				else
 					T = double_right_left_rotation(T);
 			}
-		}//右子树插入结束
+		} //右子树插入结束
 
 		T->height = max_one(get_height(T->left), get_height(T->right));
 		return T;
@@ -112,7 +112,9 @@ AVLtree insert_AVLtree(AVLtree T, elemtype e)
 int main()
 {
 	AVLtree tree = NULL;
-	char* month[12] = { "January","Febuary","March","April","May","June","July","August","September","Octber","November","December" };
+	char *month[12] = { "January",	 "Febuary", "March",	"April",
+			    "May",	 "June",    "July",	"August",
+			    "September", "Octber",  "November", "December" };
 	for (int i = 0; i < 12; i++) {
 		tree = insert_AVLtree(tree, month[i]);
 	}
