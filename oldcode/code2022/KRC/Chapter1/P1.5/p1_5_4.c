@@ -19,7 +19,8 @@ int main()
 			nline++;
 		if (c == ' ' || c == '\n' || c == '\t') //确定是不是在单词外
 			state = OUT;
-		else if (state == OUT) { //如果之前都不是空字符，那么就进入了单词内
+		else if (state ==
+			 OUT) { //如果之前都不是空字符，那么就进入了单词内
 			state = IN; //避免单词内重复计数
 			nword++;
 		}

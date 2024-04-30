@@ -1,5 +1,5 @@
-
 #ifndef K_RAND_NUMBER_H
+#define K_RAND_NUMBER_H
 
 #pragma once
 #include <stdlib.h>
@@ -12,7 +12,5 @@ int *rand_n(int max, int n)
 	}
 	return temp;
 }
-
-#define K_RAND_NUMBER_H
 
 #endif //K_RAND_NUMBER_H

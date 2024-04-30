@@ -1,4 +1,5 @@
 #ifndef K_SORT_H
+#define K_SORT_H
 
 void swap(int *a, int *b)
 {
@@ -68,7 +69,5 @@ void quick_sort(int arr[], int low, int high)
 		quick_sort(arr, pos + 1, high);
 	}
 }
-
-#define K_SORT_H
 
 #endif //K_SORT_H

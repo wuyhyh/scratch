@@ -22,7 +22,8 @@ int getline(char line[], int maxline)
 	int c;
 	int i;
 
-	for (i = 0; i < maxline - 1 && (c = getchar()) != EOF && c != '\n'; i++) {
+	for (i = 0; i < maxline - 1 && (c = getchar()) != EOF && c != '\n';
+	     i++) {
 		line[i] = c; //依次读取行中的每个字符
 	}
 	if (c == '\n') { //判断已经到达结尾

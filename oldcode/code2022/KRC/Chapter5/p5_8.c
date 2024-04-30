@@ -4,17 +4,18 @@
 
 char *month_name(int n)
 {
-	static char *name[] = { "Illegal month", "January",	  "Febuary", "March",
-							"Aprial",		 "May",		  "June",	 "July",
-							"August",		 "September", "October", "November",
-							"December" };
+	static char *name[] = { "Illegal month", "January", "Febuary",
+				"March",	 "Aprial",  "May",
+				"June",		 "July",    "August",
+				"September",	 "October", "November",
+				"December" };
 	return name[n];
 }
 
 char name[][16] = { "Illegal month", "January",	  "Febuary", "March",
-					"Aprial",		 "May",		  "June",	 "July",
-					"August",		 "September", "October", "November",
-					"December" };
+		    "Aprial",	     "May",	  "June",    "July",
+		    "August",	     "September", "October", "November",
+		    "December" };
 
 int main()
 {

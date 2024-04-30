@@ -1,13 +1,13 @@
-
 #include <stdio.h>
 #include <ctype.h>
 #include <string.h>
 
 char *name[20] = { //这里有20个人的名字
-	"zhangsan", "lisi",			"wangmazi",		 "ergoudan",	"tieniu",
-	"dabendan", "xunan",		"zhoulei",		 "wuyuhang",	"gaowenwen",
-	"jujiayi",	"zhaoshunchao", "zhangtianhang", "dengxianli",	"fengchenfan",
-	"qinzhen",	"yaochan",		"suhuiqing",	 "caizhongjun", "lizhi"
+	"zhangsan",	 "lisi",       "wangmazi",    "ergoudan",
+	"tieniu",	 "dabendan",   "xunan",	      "zhoulei",
+	"wuyuhang",	 "gaowenwen",  "jujiayi",     "zhaoshunchao",
+	"zhangtianhang", "dengxianli", "fengchenfan", "qinzhen",
+	"yaochan",	 "suhuiqing",  "caizhongjun", "lizhi"
 };
 
 //我们把名字这种字符串当作大整数，这里需要一种转换
@@ -35,7 +35,7 @@ int insert_key(Key key)
 {
 	int i;
 	for (i = hash(key); keys[i] != NULL;
-		 i = (i + 1) % M) { //如果冲突就向右边移动一位再次用除余法探测
+	     i = (i + 1) % M) { //如果冲突就向右边移动一位再次用除余法探测
 		if (key == keys[i]) {
 			return;
 		}
@@ -70,7 +70,7 @@ void delete_key(
 	i = (i + 1) % M;
 
 	while (keys[i] !=
-		   NULL) { //先保存要移除的元素(key_to_remove),把右侧的元素迁移过来
+	       NULL) { //先保存要移除的元素(key_to_remove),把右侧的元素迁移过来
 		Key key_to_re = keys[i];
 		keys[i] = NULL;
 		insert_key(key_to_re);
@@ -104,14 +104,16 @@ int main()
 
 		int pos = get_index(new_name);
 		if (pos > 0) {
-			printf("%s 已存在在位置 %d,是否删除(y/n)\n", new_name, pos);
+			printf("%s 已存在在位置 %d,是否删除(y/n)\n", new_name,
+			       pos);
 			int c = getchar();
 			getchar();
 			switch (c) {
 			case 'n':
 				break;
 			case 'y': {
-				printf("%s 已删除\n", new_name), delete_key(new_name);
+				printf("%s 已删除\n", new_name),
+					delete_key(new_name);
 				break;
 			}
 			default:
@@ -120,7 +122,7 @@ int main()
 			}
 		} else {
 			printf("%s 不存在，已插入到位置%d\n", new_name,
-				   insert_key(new_name));
+			       insert_key(new_name));
 		}
 
 		printf("是否显示hash_table(y/n)\n");

@@ -1,4 +1,5 @@
 #ifndef K_SHOW_ARRAY_H
+#define K_SHOW_ARRAY_H
 
 #include <stdio.h>
 void show(int arr[], int n)
@@ -9,7 +10,5 @@ void show(int arr[], int n)
 			putchar('\n');
 	}
 }
-
-#define K_SHOW_ARRAY_H
 
 #endif //K_SHOW_ARRAY_H

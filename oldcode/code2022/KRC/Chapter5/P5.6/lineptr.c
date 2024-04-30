@@ -6,13 +6,14 @@
 char *lineptr[MAXLINE]; //这是一个指针数组
 
 #define MAXLEN 1000
-int getline(char *line,
-			int maxline) //getline函数将字符读入存放在line[]之中，返回行中字符数
+//getline函数将字符读入存放在line[]之中，返回行中字符数
+int getline(char *line, int maxline)
 {
 	int c;
 	int i;
 	//不超出限制且未到结束处就不挺读入
-	for (i = 0; i < maxline - 1 && (c = getchar()) != EOF && c != '\n'; i++) {
+	for (i = 0; i < maxline - 1 && (c = getchar()) != EOF && c != '\n';
+	     i++) {
 		line[i] = c;
 	}
 	if (c == '\n') {
@@ -80,16 +81,16 @@ void q_sort(char *lineptr[], int left, int right)
 	swap(lineptr, partition, left);
 	last = left;
 	for (i = left + 1; i <= right; i++) {
-		if (strcmp(lineptr[i], lineptr[left]) < 0) { //last是慢指针，i是快指针
+		if (strcmp(lineptr[i], lineptr[left]) <
+		    0) { //last是慢指针，i是快指针
 			last++; //如果i处的元素大于切分元素，i就快速突进
-			swap(
-				lineptr, i,
-				last); //如果i处的元素小于切分元素，那么就可以通知last移动腾出一个交换位置
+			swap(lineptr, i,
+			     last); //如果i处的元素小于切分元素，那么就可以通知last移动腾出一个交换位置
 		}
 	}
 
 	swap(lineptr, left,
-		 last); //last标记了切分元素的最终位置，其左侧元素都小于切分元素
+	     last); //last标记了切分元素的最终位置，其左侧元素都小于切分元素
 	q_sort(lineptr, left, last - 1);
 	q_sort(lineptr, last + 1, right);
 }

@@ -1,11 +1,12 @@
 #ifndef K_RAND_INT_H
+#define K_RAND_INT_H
 
-#include<stdlib.h>
-#include<stdio.h>
+#include <stdlib.h>
+#include <stdio.h>
 
-int* rand_int(int n, int max)
+int *rand_int(int n, int max)
 {
-	int* temp = (int*)malloc(n * sizeof(*temp));
+	int *temp = (int *)malloc(n * sizeof(*temp));
 	for (int i = 0; i < n; i++) {
 		temp[i] = rand() % max + 1;
 	}
@@ -20,8 +21,5 @@ void print_int(int arr[], int n, int gap)
 			putchar('\n');
 	}
 }
-
-
-#define K_RAND_INT_H
 
 #endif //K_RAND_INT_H

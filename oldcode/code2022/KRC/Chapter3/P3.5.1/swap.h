@@ -1,4 +1,5 @@
 #ifndef K_SWAP_H
+#define K_SWAP_H
 
 void swap(int *a, int *b)
 {
@@ -6,7 +7,5 @@ void swap(int *a, int *b)
 	*a = *b;
 	*b = temp;
 }
-
-#define K_SWAP_H
 
 #endif //K_SWAP_H

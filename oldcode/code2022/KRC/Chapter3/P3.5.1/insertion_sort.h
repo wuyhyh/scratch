@@ -1,5 +1,5 @@
 #ifndef K_INSERTION_SORT_H
-
+#define K_INSERTION_SORT_H
 #include "swap.h"
 
 void insertion_sort(int arr[], int n)
@@ -27,7 +27,5 @@ void insertion(int arr[], int n)
 		}
 	}
 }
-
-#define K_INSERTION_SORT_H
 
 #endif //K_INSERTION_SORT_H
