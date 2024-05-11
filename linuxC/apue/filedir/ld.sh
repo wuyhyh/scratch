@@ -1,1 +1,1 @@
-export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/home/CLionProjects/scratch/linux-C/apue/lib
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/home/scratch/linuxC/apue/lib
