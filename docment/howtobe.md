@@ -75,7 +75,7 @@ textbook：https://git-scm.com/book/zh/v2
 
 ### 3.2 操作系统
 
-`操作系统导论`
+`操作系统导论` https://github.com/remzi-arpacidusseau/ostep-code
 
 `操作系统设计与实现`
 
@@ -99,21 +99,25 @@ textbook：https://git-scm.com/book/zh/v2
 
 ### 4.1 gcc
 
-南洋理工：
+南洋理工：https://www3.ntu.edu.sg/home/ehchua/programming/cpp/gcc_make.html
 
 ### 4.2 GNU make
 
-GNU make官方文档：
+GNU make官方文档：https://www.gnu.org/software/make/manual/make.pdf
 
-跟我一起写Makefile：
+跟我一起写Makefile：https://seisman.github.io/how-to-write-makefile/Makefile.pdf
 
 ### 4.3 Modern cmake
 
-现代cmake:
+现代cmake: https://modern-cmake-cn.github.io/Modern-CMake-zh_CN/
+
+英文版PDF：https://cliutils.gitlab.io/modern-cmake/modern-cmake.pdf
 
 ## 5. Linux基础
 
 ### 5.1 中科大Linux101
+
+Linux101: https://101.lug.ustc.edu.cn/
 
 ## 6. 文档
 
