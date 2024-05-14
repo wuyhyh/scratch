@@ -1,0 +1,124 @@
+# 怎样当好一个程序员
+
+## 1. 版本控制工具
+
+### 1.1 git
+
+git是一个分布式的版本控制工具。
+
+textbook：https://git-scm.com/book/zh/v2
+
+常用的命令：
+
+    git init
+    git status
+    git branch
+    git add .
+    git commit -m "message"
+    git remote -v
+    git remote add upstream <URL>
+    git clone <URL>
+    git checkout -b new_branch upstream/master
+    git pull origin master -r
+    git push origin master -f
+    git commit --amend
+    git restore <file>
+    git reset hard <sha40>
+    git log
+    git branch -d <branch_name>
+    git branch -D <branch_name>
+    git push origin --delete <branch_name>
+
+## 2.命令行环境
+
+### 2.1 文件和目录
+
+    ls -lts
+    tree
+    du
+    free
+    df
+    file <file_name>
+
+### 2.2 进程
+
+    ps -ef | grep <process_name>
+    kill -9 <pid>
+    ./a.out &
+
+### 2.3 查找文件
+
+    find <path> -name "file_name" -size <"+1G"> -or -type d
+
+### 2.4 压缩文件
+
+    tar -cz -f <target.tar.gz> <file1> <file2> <file3>
+
+### 2.5 文本替换
+
+    sed 's/origin/to_replace/g' <file_name>
+
+### 2.6 内核驱动
+
+    lsmod
+    insmod <module.ko>
+    modprobe <module>
+    rmmod  <module>
+
+## 3. 理论书籍
+
+### 3.1 编程语言
+
+`The C programming language`
+
+`计算机程序的构造和解释`
+
+### 3.2 操作系统
+
+`操作系统导论`
+
+`操作系统设计与实现`
+
+`现代操作系统`
+
+`Linux内核设计与实现`
+
+`Linux内核完全注释`
+
+`深入Linux内核架构`
+
+`Linux设备驱动程序`
+
+`Linux系统编程接口`
+
+`Unix环境高级编程`
+
+`Unix网络编程`
+
+## 4. 构建工具
+
+### 4.1 gcc
+
+南洋理工：
+
+### 4.2 GNU make
+
+GNU make官方文档：
+
+跟我一起写Makefile：
+
+### 4.3 Modern cmake
+
+现代cmake:
+
+## 5. Linux基础
+
+### 5.1 中科大Linux101
+
+## 6. 文档
+
+### 6.1 markdown
+
+
+
+
