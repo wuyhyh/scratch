@@ -4,8 +4,6 @@
 
 ### 1.1 git
 
-git是一个分布式的版本控制工具。
-
 textbook：https://git-scm.com/book/zh/v2
 
 常用的命令：
