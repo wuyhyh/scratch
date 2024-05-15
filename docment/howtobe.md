@@ -4,28 +4,8 @@
 
 ### 1.1 git
 
-textbook：https://git-scm.com/book/zh/v2
-
-常用的命令：
-
-    git init
-    git status
-    git branch
-    git add .
-    git commit -m "message"
-    git remote -v
-    git remote add upstream <URL>
-    git clone <URL>
-    git checkout -b new_branch upstream/master
-    git pull origin master -r
-    git push origin master -f
-    git commit --amend
-    git restore <file>
-    git reset hard <sha40>
-    git log
-    git branch -d <branch_name>
-    git branch -D <branch_name>
-    git push origin --delete <branch_name>
+#### progit
+https://git-scm.com/book/zh/v2
 
 ## 2.命令行环境
 
@@ -33,9 +13,6 @@ textbook：https://git-scm.com/book/zh/v2
 
     ls -lts
     tree
-    du
-    free
-    df
     file <file_name>
 
 ### 2.2 进程
@@ -63,7 +40,7 @@ textbook：https://git-scm.com/book/zh/v2
     modprobe <module>
     rmmod  <module>
 
-## 3. 理论书籍
+## 3. 理论
 
 ### 3.1 编程语言
 
@@ -121,6 +98,10 @@ Linux101: https://101.lug.ustc.edu.cn/
 
 ### 6.1 markdown
 
+https://roc-mountain.github.io/Markdown/
 
+## 7. 项目
 
+### 7.1 xv6项目
 
+### 7.2 minix
