@@ -70,38 +70,33 @@ https://git-scm.com/book/zh/v2
 
 `Unix网络编程`
 
-## 4. 构建工具
+## 4. 设计模式
 
-### 4.1 gcc
-
-南洋理工：https://www3.ntu.edu.sg/home/ehchua/programming/cpp/gcc_make.html
-
-### 4.2 GNU make
-
-GNU make官方文档：https://www.gnu.org/software/make/manual/make.pdf
-
-跟我一起写Makefile：https://seisman.github.io/how-to-write-makefile/Makefile.pdf
-
-### 4.3 Modern cmake
-
-现代cmake: https://modern-cmake-cn.github.io/Modern-CMake-zh_CN/
-
-英文版PDF：https://cliutils.gitlab.io/modern-cmake/modern-cmake.pdf
+[图说设计模式](https://design-patterns.readthedocs.io/zh-cn/latest/)
+[22种设计模式(不开代理)](https://refactoringguru.cn/design-patterns/catalog)
 
 ## 5. Linux基础
 
 ### 5.1 中科大Linux101
 
-Linux101: https://101.lug.ustc.edu.cn/
+[Linux101](https://101.lug.ustc.edu.cn/)
+
+### 5.2 快速教程
+
+[linux工具快速教程](https://linuxtools-rst.readthedocs.io/zh-cn/latest/)
 
 ## 6. 文档
 
 ### 6.1 markdown
 
-https://roc-mountain.github.io/Markdown/
+[编写整洁优雅的Markdown](https://roc-mountain.github.io/Markdown/)
 
 ## 7. 项目
 
 ### 7.1 xv6项目
 
 ### 7.2 minix
+
+https://blog.seisman.info/
+
+[Git 版本控制：构建高效协作和开发流程的最佳实践](https://cloud.tencent.com/developer/article/2412186)
