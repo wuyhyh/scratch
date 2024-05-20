@@ -32,6 +32,9 @@ sed -i 's/-DIN_PLACE=1/-DIN_PLACE=0 -DENABLE_RESOLVE_NEIGH=0/' build.sh
 
 [download PDF](https://indico.cern.ch/event/218156/attachments/351725/490089/RDMA_Aware_Programming_user_manual.pdf)
 
+## 3. RoCE gid
+
+[gid](https://docs.nvidia.com/networking/display/mlnxenv497100lts/rdma+over+converged+ethernet+(roce)#src-129571467_safe-id-UkRNQW92ZXJDb252ZXJnZWRFdGhlcm5ldChSb0NFKS1HSURUYWJsZWluc3lzZnM)
 
 
 
