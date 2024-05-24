@@ -1,3 +1,1 @@
-# scratch
-
-一些打草稿的代码
+The code related to the C programming language.
