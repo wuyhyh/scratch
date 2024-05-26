@@ -2,6 +2,8 @@
 // Created by root on 4/25/24.
 //
 
+// 将标准输入复制到标准输出
+
 #include "apue.h"
 
 #define BUFFSIZE 4096
