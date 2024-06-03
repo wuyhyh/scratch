@@ -67,5 +67,6 @@ python3 -c 'print(0x37)'
 ```shell
  readelf -a a.out
 ```
-为什么我的helloworld那么大？
+为什么我的`helloworld`那么大？
 
+处理器：无情的执行指令的状态机。
