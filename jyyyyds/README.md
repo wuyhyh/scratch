@@ -64,5 +64,8 @@ python3 -c 'print(0x37)'
 
 ### 最小的可执行程序？
 
-
+```shell
+ readelf -a a.out
+```
+为什么我的helloworld那么大？
 
