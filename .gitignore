@@ -1,6 +1,7 @@
 # CLion
 .idea/
 .DS_Store
+.vscode/
 
 # Prerequisites
 *.d
