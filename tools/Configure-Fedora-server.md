@@ -1,17 +1,39 @@
 # 配置Fedora Server
 
-### 1. 下载安装开发用的软件
+### 1. 下载安装developing tools
 
 ```shell
 yum install gcc -y
-yum install git -y
 yum install gdb -y
 yum install make -y
 yum install cmake -y
 yum install python -y
 ```
 
-### 2. 生成ssh密钥并配置到github
+### 2. 配置VCS
+
+1. **install git**
+
+```shell
+yum install git -y
+```
+
+2. **config git**
+
+设置用户名和邮箱
+
+```shell
+git config --global usr.name "wuyhyh"
+git config --global usr.email "wuyhyh@gmail.com"
+```
+
+查看设置
+
+```shell
+git config --list
+```
+
+3. **生成ssh密钥并配置到github**
 
 ```shell
 ssh-keygen
