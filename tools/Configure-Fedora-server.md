@@ -23,8 +23,8 @@ yum install git -y
 设置用户名和邮箱
 
 ```shell
-git config --global usr.name "wuyhyh"
-git config --global usr.email "wuyhyh@gmail.com"
+git config --global user.name "wuyhyh"
+git config --global user.email wuyhyh@gmail.com
 ```
 
 查看设置
