@@ -2,4 +2,4 @@
 
 *Stay hungry，Stay foolish.*
 
-![朋友](./picture/pengyou.png)
+![朋友](pictures/pengyou.png)
