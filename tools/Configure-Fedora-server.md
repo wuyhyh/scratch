@@ -30,7 +30,7 @@ git config --global user.email wuyhyh@gmail.com
 查看设置
 
 ```shell
-git config --list
+git config --list | more
 ```
 
 3. **生成ssh密钥并配置到github**
