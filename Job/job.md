@@ -15,7 +15,7 @@
 ### 阅读文档
 
 - RDMA杂谈专栏
-- IB协议卷1
+- InfiniBand Architecture Specification
 - RDMA aware programming manual
 - Linux kernel documentation
 
