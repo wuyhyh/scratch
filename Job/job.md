@@ -7,7 +7,7 @@
 - 操作系统导论
 - Linux设备驱动程序
 - Unix环境高级编程
-- Unix网络编程卷1：socket编程
+- Unix网络编程卷1:socket联网API
 - Unix网络编程卷2:进程间通信
 - Linux内核完全注释
 - 操作系统设计与实现
