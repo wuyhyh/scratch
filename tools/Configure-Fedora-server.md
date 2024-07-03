@@ -8,6 +8,8 @@ yum install gdb -y
 yum install make -y
 yum install cmake -y
 yum install python -y
+yum install patch -y
+yum install diffstat -y
 ```
 
 ### 2. 配置VCS
