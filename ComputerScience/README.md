@@ -15,5 +15,28 @@
 
 如今，涌入计算机行业的人数激增，然而计算机专业的毕业生数量基本上未曾改变。第二种工程师的供过于求正在开始减少他们的工作机会，使他们无法涉足行业内更加有意义的工作。对你而言，不论正在努力成为第一种工程师，还是只想让自己的职业生涯更加安全，学习计算机科学是唯一可靠的途径。
 
+## 从Linux内核出发
 
+### 学习linux内核的基础知识
 
+> linux kernel developing
+
+> understand linux kernel
+
+> linux device driver
+
+### 系统编程
+
+> advanced unix environment programming
+
+> linux/unix developing interfaces
+
+### 从进程通信到高速网络
+
+> unix networking programming: ipc
+
+> unix networking programming: socket api
+
+> tcp ip illustrated
+
+> infiniband specification
