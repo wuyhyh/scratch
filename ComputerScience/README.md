@@ -19,24 +19,24 @@
 
 ### 学习linux内核的基础知识
 
-> linux kernel developing
-
-> understand linux kernel
-
-> linux device driver
+- linux kernel developing
+- understand linux kernel
+- linux device driver
 
 ### 系统编程
 
-> advanced unix environment programming
-
-> linux/unix developing interfaces
+- advanced unix environment programming
+- linux/unix developing interfaces
 
 ### 从进程通信到高速网络
 
-> unix networking programming: ipc
+- unix networking programming: ipc
+- unix networking programming: socket api
+- tcp ip illustrated
+- infiniband specification
 
-> unix networking programming: socket api
+### 编程语言
 
-> tcp ip illustrated
-
-> infiniband specification
+- structure and interpret of computer program
+- C
+- Python
