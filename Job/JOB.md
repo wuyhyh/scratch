@@ -9,25 +9,26 @@
 - Unix网络编程卷1:socket联网API
 - Unix网络编程卷2:进程间通信
 - TCP/IP详解卷1:协议
-- 操作系统导论
-- 操作系统设计与实现 [✔️]
 
 ### 阅读文档
 
-- RDMA杂谈专栏
 - **InfiniBand Architecture Specification**
+- RDMA杂谈专栏
 - RDMA aware programming manual
 - Linux kernel documentation
 
 ### 阅读代码
 
-- jyy code
-- Linux kernel source code
+- rdma-core
+- softRoCE
 - V200 RoCE driver
 
-### 课程
+### 课程和动手
 
 - 蒋炎岩2024操作系统
+- 教材:操作系统导论
+- JYY wiki & code
+- 参考资料:操作系统设计与实现 [✔️]
 
 ### 工具的使用
 
