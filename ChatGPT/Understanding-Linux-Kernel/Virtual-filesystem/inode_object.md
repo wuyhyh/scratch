@@ -1,98 +1,37 @@
-索引节点对象（inode object）是Linux文件系统中的一个关键数据结构，它用于存储文件或目录的元数据。每个文件和目录在文件系统中都有一个唯一的索引节点对象，通过该对象可以获取文件或目录的各种属性和位置。下面是索引节点对象的详细解释：
+### 索引节点对象的详细解释
 
-### 索引节点对象的结构
+索引节点对象（inode object）是Linux文件系统中的一个关键数据结构，它用于存储文件或目录的元数据。每个文件和目录在文件系统中都有一个唯一的索引节点对象，通过该对象可以获取文件或目录的各种属性和位置。
 
-索引节点对象通常由结构体 `struct inode` 表示，它包含了以下主要字段：
+#### 索引节点对象的数据结构
 
-1. **i_mode**：
-    - 类型：`umode_t`
-    - 描述：文件类型和访问权限标志（如普通文件、目录、符号链接等，以及读、写、执行权限）。
+| 字段          | 类型                        | 描述                                                               |
+|---------------|-----------------------------|--------------------------------------------------------------------|
+| i_mode        | umode_t                     | 文件类型和访问权限标志（如普通文件、目录、符号链接等，以及读、写、执行权限）。 |
+| i_uid         | kuid_t                      | 文件所有者的用户ID。                                               |
+| i_gid         | kgid_t                      | 文件所有者的组ID。                                                 |
+| i_size        | loff_t                      | 文件的大小，以字节为单位。                                         |
+| i_atime       | struct timespec64           | 文件的最后访问时间。                                               |
+| i_mtime       | struct timespec64           | 文件的最后修改时间。                                               |
+| i_ctime       | struct timespec64           | 文件的状态更改时间。                                               |
+| i_nlink       | unsigned int                | 文件的链接计数，表示有多少个硬链接指向这个文件。                   |
+| i_blocks      | blkcnt_t                    | 文件使用的块数。                                                   |
+| i_op          | const struct inode_operations * | 指向inode操作函数集合的指针，定义了与inode相关的操作（如创建、删除、链接等）。 |
+| i_fop         | const struct file_operations * | 指向文件操作函数集合的指针，定义了与文件相关的操作（如读、写、打开、关闭等）。 |
+| i_sb          | struct super_block *        | 指向文件系统的超级块对象，表示这个inode所属的文件系统。            |
+| i_ino         | ino_t                       | 文件的索引节点号，文件系统中的唯一标识符。                         |
+| i_private     | void *                      | 指向文件系统特定数据的指针，用于存储文件系统私有数据。             |
 
-2. **i_uid** 和 **i_gid**：
-    - 类型：`kuid_t` 和 `kgid_t`
-    - 描述：文件所有者的用户ID和组ID。
+#### 索引节点对象的主要操作
 
-3. **i_size**：
-    - 类型：`loff_t`
-    - 描述：文件的大小，以字节为单位。
-
-4. **i_atime、i_mtime、i_ctime**：
-    - 类型：`struct timespec64`
-    - 描述：文件的最后访问时间（i_atime）、最后修改时间（i_mtime）和状态更改时间（i_ctime）。
-
-5. **i_nlink**：
-    - 类型：`unsigned int`
-    - 描述：文件的链接计数，表示有多少个硬链接指向这个文件。
-
-6. **i_blocks**：
-    - 类型：`blkcnt_t`
-    - 描述：文件使用的块数。
-
-7. **i_op**：
-    - 类型：`const struct inode_operations *`
-    - 描述：指向inode操作函数集合的指针，定义了与inode相关的操作（如创建、删除、链接等）。
-
-8. **i_fop**：
-    - 类型：`const struct file_operations *`
-    - 描述：指向文件操作函数集合的指针，定义了与文件相关的操作（如读、写、打开、关闭等）。
-
-9. **i_sb**：
-    - 类型：`struct super_block *`
-    - 描述：指向文件系统的超级块对象，表示这个inode所属的文件系统。
-
-10. **i_ino**：
-    - 类型：`ino_t`
-    - 描述：文件的索引节点号，文件系统中的唯一标识符。
-
-11. **i_private**：
-    - 类型：`void *`
-    - 描述：指向文件系统特定数据的指针，用于存储文件系统私有数据。
-
-### 索引节点对象的操作
-
-索引节点对象通过一组操作函数来管理，这些操作函数定义在 `struct inode_operations` 结构体中，包括但不限于以下函数：
-
-1. **create**：
-    - 功能：创建一个新文件。
-    - 原型：`int (*create)(struct inode *dir, struct dentry *dentry, umode_t mode, bool excl);`
-
-2. **lookup**：
-    - 功能：在目录中查找一个目录项。
-    - 原型：`struct dentry *(*lookup)(struct inode *dir, struct dentry *dentry, unsigned int flags);`
-
-3. **link**：
-    - 功能：创建一个硬链接。
-    - 原型：`int (*link)(struct dentry *old_dentry, struct inode *dir, struct dentry *new_dentry);`
-
-4. **unlink**：
-    - 功能：删除一个文件。
-    - 原型：`int (*unlink)(struct inode *dir, struct dentry *dentry);`
-
-5. **mkdir**：
-    - 功能：创建一个目录。
-    - 原型：`int (*mkdir)(struct inode *dir, struct dentry *dentry, umode_t mode);`
-
-6. **rmdir**：
-    - 功能：删除一个目录。
-    - 原型：`int (*rmdir)(struct inode *dir, struct dentry *dentry);`
-
-7. **rename**：
-    - 功能：重命名文件或目录。
-    - 原型：`int (*rename)(struct inode *old_dir, struct dentry *old_dentry, struct inode *new_dir, struct dentry *new_dentry, unsigned int flags);`
-
-### 索引节点对象的初始化和使用
-
-1. **创建索引节点**：
-    - 当一个文件或目录被创建时，文件系统分配并初始化一个新的索引节点对象。
-    - 初始化包括设置文件类型、权限、所有者、时间戳等元数据。
-
-2. **路径解析和查找**：
-    - 在路径解析过程中，内核通过查找目录项获取对应的索引节点对象。
-    - 索引节点对象用于进一步的文件或目录操作。
-
-3. **文件读写操作**：
-    - 文件被打开时，索引节点对象的文件操作函数（如`read`和`write`）被调用，执行实际的文件读写操作。
-    - 这些操作通过文件操作函数集合（`struct file_operations`）来实现。
+| 操作函数      | 功能描述                                   | 原型                                                           |
+|---------------|--------------------------------------------|----------------------------------------------------------------|
+| create        | 创建一个新文件。                           | int (*create)(struct inode *dir, struct dentry *dentry, umode_t mode, bool excl); |
+| lookup        | 在目录中查找一个目录项。                   | struct dentry *(*lookup)(struct inode *dir, struct dentry *dentry, unsigned int flags); |
+| link          | 创建一个硬链接。                           | int (*link)(struct dentry *old_dentry, struct inode *dir, struct dentry *new_dentry); |
+| unlink        | 删除一个文件。                             | int (*unlink)(struct inode *dir, struct dentry *dentry);       |
+| mkdir         | 创建一个目录。                             | int (*mkdir)(struct inode *dir, struct dentry *dentry, umode_t mode); |
+| rmdir         | 删除一个目录。                             | int (*rmdir)(struct inode *dir, struct dentry *dentry);        |
+| rename        | 重命名文件或目录。                         | int (*rename)(struct inode *old_dir, struct dentry *old_dentry, struct inode *new_dir, struct dentry *new_dentry, unsigned int flags); |
 
 ### 示例代码
 
