@@ -1,15 +1,19 @@
 /******************************************************************************
  *
- * Name: uidgid.c - 用户标识
- * Created on 2024/05/27
+ * Name: testerror.c - 出错函数的使用方法
+ * Created on 2024/05/26
  * Copyright (C) 2022 - 2024, wyh.
  *
  *****************************************************************************/
 
-#include "apue.h"
+#include "../include/apue.h"
+#include <error.h>
 
 int main(int argc, char *argv[])
 {
-	printf("uid = %d,gid = %d\n", getuid(), getgid());
+	fprintf(stderr, "EACCES: %s\n", strerror(EACCES));
+	errno = ENOENT;
+	perror(argv[0]);
+
 	exit(0);
 }

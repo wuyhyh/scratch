@@ -7,6 +7,6 @@
 ## 第1章 unix基础知识
 
 unix操作系统的体系结构：
-![unix的体系结构](./pic/unix.png)
+![unix的体系结构](pic/unix.png)
 
 

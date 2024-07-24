@@ -5,7 +5,7 @@
 // 列出一个目录中的所有文件
 // 目录是什么？目录是包含目录项的文件，本质上还是文件。
 
-#include "apue.h"
+#include "../include/apue.h"
 #include <dirent.h>
 
 int main(int argc, char *argv[])

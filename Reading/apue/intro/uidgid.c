@@ -1,15 +1,15 @@
 /******************************************************************************
  *
- * Name: hello.c - 打印进程ID
- * Created on 2024/05/26
+ * Name: uidgid.c - 用户标识
+ * Created on 2024/05/27
  * Copyright (C) 2022 - 2024, wyh.
  *
  *****************************************************************************/
 
-#include "apue.h"
+#include "../include/apue.h"
 
-int main(int argc, char argv[])
+int main(int argc, char *argv[])
 {
-	printf("hello from process ID %ld\n", (long)getpid());
-	exit(0)
+	printf("uid = %d,gid = %d\n", getuid(), getgid());
+	exit(0);
 }

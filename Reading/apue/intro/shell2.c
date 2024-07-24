@@ -1,13 +1,15 @@
 /******************************************************************************
  *
- * Name: shell1.c - 进程控制函数fork(),从标准输入中读入命令并执行
- * Created on 2024/05/26
+ * Name: shell2.c - Description
+ * Created on 2024/05/29
  * Copyright (C) 2022 - 2024, wyh.
  *
  *****************************************************************************/
 
-#include "apue.h"
+#include "../include/apue.h"
 #include <sys/wait.h>
+
+static void sig_int(int);
 
 int main(int argc, char *argv[])
 {
@@ -15,25 +17,31 @@ int main(int argc, char *argv[])
 	pid_t pid;
 	int status;
 
-	printf("%% "); // print prompt here
+	if (signal(SIGINT, sig_int) == SIG_ERR)
+		err_sys("signal error");
+
+	printf("%% ");
 	while (fgets(buf, MAXLINE, stdin) != NULL) {
 		if (buf[strlen(buf) - 1] == '\n')
-			buf[strlen(buf) - 1] = 0; // replace new line with null
+			buf[strlen(buf) - 1] = 0;
 
-		if ((pid = fork()) < 0) {
+		if ((pid = fork()) < 0)
 			err_sys("fork error");
-		} else if (pid == 0) { // child
+		else if (pid == 0) {
 			execlp(buf, buf, (char *)0);
 			err_ret("couldn't execute: %s", buf);
 			exit(127);
 		}
 
-		// parent
 		if ((pid = waitpid(pid, &status, 0)) < 0)
 			err_sys("waitpid error");
-
 		printf("%% ");
 	}
 
 	exit(0);
+}
+
+void sig_int(int signo)
+{
+	printf("interrupt\n%% ");
 }

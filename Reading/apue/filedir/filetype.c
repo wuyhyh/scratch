@@ -4,7 +4,7 @@
 
 // 输出文件的类型
 
-#include "apue.h"
+#include "../include/apue.h"
 
 int main(int argc, char *argv[])
 {

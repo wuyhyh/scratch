@@ -31,8 +31,8 @@
    创建一个新的目录来保存你的内核模块源代码文件。例如：
 
    ```bash
-   mkdir ~/kernel-module
-   cd ~/kernel-module
+   mkdir ~/Kernel_Modules
+   cd ~/Kernel_Modules
    ```
 
    然后创建一个简单的内核模块文件 `hello.c`：

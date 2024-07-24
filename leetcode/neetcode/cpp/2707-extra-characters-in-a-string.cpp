@@ -5,7 +5,7 @@
 
   Return the minimum number of extra characters left over if you break up s optimally.
 
-  Ex. Input: s = "leetscode", dictionary = ["leet","code","leetcode"]
+  Ex. Input: s = "leetscode", dictionary = ["leet","code","LeetCode"]
       Output: 1
       Explanation: We can break s in two substrings: "leet" from index 0 to 3 and "code" from index 5 to 8. There is only 1 unused character (at index 4), so we return 1.
 

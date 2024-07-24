@@ -1,5 +1,5 @@
 /*
- * @lc app=leetcode id=153 lang=cpp
+ * @lc app=LeetCode id=153 lang=cpp
  *
  * [153] Find Minimum in Rotated Sorted Array
  */
