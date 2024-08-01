@@ -134,7 +134,7 @@ sudo hostname new-hostname
 
 **1. 设置文件头部注释**
 
-![header](../Pictures/header.png)
+![header](../pictures/header.png)
 
 头部注释模板：
 
