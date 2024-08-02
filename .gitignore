@@ -2,6 +2,7 @@
 .idea/
 .DS_Store
 .vscode/
+linux-6.8.5/
 
 # Prerequisites
 *.d
