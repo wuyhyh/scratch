@@ -3,6 +3,7 @@
 .DS_Store
 .vscode/
 linux-6.8.5/
+auto_ssh.sh
 
 # Prerequisites
 *.d
