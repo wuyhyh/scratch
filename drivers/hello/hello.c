@@ -17,13 +17,13 @@ MODULE_VERSION("0.1");
 
 static int __init hello_init(void)
 {
-	printk(KERN_INFO "Hello, World!\n");
+	printk(KERN_ALERT "Hello, World!\n");
 	return 0;
 }
 
 static void __exit hello_exit(void)
 {
-	printk(KERN_INFO "Goodbye, World!\n");
+	printk(KERN_ALERT "Goodbye, World!\n");
 }
 
 module_init(hello_init);
