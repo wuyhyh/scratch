@@ -1,4 +1,4 @@
-obj-m += scull.o
+obj-m += hello.o
 
 all:
 	make -C $(KDIR) M=$(PWD) modules

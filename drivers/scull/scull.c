@@ -1,7 +1,7 @@
 /******************************************************************************
  *
- * Name: hello.c - Description
- * Created on 2024/08/01
+ * Name: scull.c - Description
+ * Created on 2024/08/02
  * Copyright (C) 2022 - 2024, wyh.
  *
  *****************************************************************************/
@@ -16,6 +16,7 @@ MODULE_AUTHOR("wyh");
 MODULE_DESCRIPTION("A simple scull LKM");
 MODULE_VERSION("0.1");
 
+/*
 // 设备方法
 struct file_operations scull_fops {
 	.owner = THIS_MODULE;
@@ -51,7 +52,7 @@ static void scull_setup_cdev(struct scull_dev *dev, int index)
 	if (err)
 		printk(KERN_NOTICE "Error %d adding scull%d", err, index);
 }
-
+*/
 static int __init scull_init(void)
 {
 	printk(KERN_INFO "Hello, scull!\n");
