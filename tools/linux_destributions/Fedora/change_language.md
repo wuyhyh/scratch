@@ -1,6 +1,6 @@
 你可以将上述步骤编写为一个 Bash 脚本。以下是一个示例脚本，将系统语言从中文更改为英文：
 
-```bash
+```shell
 #!/bin/bash
 
 # 设置语言为英文（美国）
@@ -34,6 +34,10 @@ else
     echo 'export LANG=en_US.UTF-8' >> "$BASHRC"
     echo 'export LC_ALL=en_US.UTF-8' >> "$BASHRC"
 fi
+
+# 安装 en_US.UTF-8 语言包
+echo "安装 en_US.UTF-8 语言包..."
+sudo dnf install -y glibc-langpack-en
 
 # 修改 /etc/default/grub 文件
 echo "修改 $GRUB_CONF 文件..."

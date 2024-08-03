@@ -1,4 +1,3 @@
-
 #!/bin/bash
 
 # 设置语言为英文（美国）
@@ -32,6 +31,10 @@ else
     echo 'export LANG=en_US.UTF-8' >> "$BASHRC"
     echo 'export LC_ALL=en_US.UTF-8' >> "$BASHRC"
 fi
+
+# 安装 en_US.UTF-8 语言包
+echo "安装 en_US.UTF-8 语言包..."
+sudo dnf install -y glibc-langpack-en
 
 # 修改 /etc/default/grub 文件
 echo "修改 $GRUB_CONF 文件..."
