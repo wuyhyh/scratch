@@ -1,7 +1,7 @@
 obj-m += hello.o
 
 all:
-	make -C $(KDIR) M=$(PWD) modules
+	make -C /home/CLionProjects/scratch/linux-6.6.43 M=$(PWD) modules
 
 clean:
-	make -C $(KDIR) M=$(PWD) clean
+	make -C /home/CLionProjects/scratch/linux-6.6.43 M=$(PWD) clean

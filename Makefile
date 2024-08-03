@@ -1,9 +1,8 @@
-# 用于linux kernel developing的根Makefile
-
-KDIR := /home/CLionProjects/scratch/linux-6.4.43
+obj-y += drivers/hello/
+obj-y += drivers/scull/
 
 all:
-	make -C $(KDIR) M=$(PWD) modules
+	make -C /home/CLionProjects/scratch/linux-6.6.43 M=$(PWD) modules
 
 clean:
-	make -C $(KDIR) M=$(PWD) clean
+	make -C /home/CLionProjects/scratch/linux-6.6.43 M=$(PWD) clean
