@@ -342,6 +342,8 @@ static int __init scull_init(void)
 		return result;
 	}
 
+	printk(KERN_INFO "scull: registered with major number %d\n",scull_major);
+
 	// 分配和初始化设备
 	scull_devices =
 		kmalloc(scull_nr_devs * sizeof(struct scull_dev), GFP_KERNEL);
