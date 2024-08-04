@@ -149,6 +149,33 @@ long scull_ioctl(struct file *filp, unsigned int cmd, unsigned long arg)
 	return 0;
 }
 
+// 实现scull_follow方法
+struct scull_qset *scull_follow(struct scull_dev *dev, int n)
+{
+	struct scull_qset *qs = dev->data;
+
+	if (!qs) {
+		qs = dev->data = kmalloc(sizeof(struct scull_qset), GFP_KERNEL);
+		if (qs == NULL)
+			return NULL;
+		memset(qs, 0, sizeof(struct scull_qset));
+	}
+
+	while (n--) {
+		if (!qs->next) {
+			qs->next =
+				kmalloc(sizeof(struct scull_qset), GFP_KERNEL);
+			if (qs->next == NULL) {
+				return NULL;
+			}
+			memset(qs->next, 0, sizeof(struct scull_qset));
+		}
+		qs = qs->next;
+	}
+
+	return qs;
+}
+
 // read and write
 ssize_t scull_read(struct file *filp, char __user *buf, size_t count,
 		   loff_t *f_pos)
@@ -283,4 +310,5 @@ static void __exit scull_cleanup_module(void)
 	printk(KERN_INFO "Goodbye, scull_module!\n");
 }
 
-module_init(scull_init_module) module_exit(scull_cleanup_module)
+module_init(scull_init_module);
+module_exit(scull_cleanup_module);
