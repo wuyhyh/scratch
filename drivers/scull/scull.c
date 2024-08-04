@@ -20,6 +20,17 @@ MODULE_AUTHOR("wyh");
 MODULE_DESCRIPTION("A simple scull LKM");
 MODULE_VERSION("0.1");
 
+// 全局变量和宏定义
+#define SCULL_QUANTUM 4000
+#define SCULL_QSET 1000
+
+int scull_major = 0;
+int scull_minor = 0;
+int scull_quantum = SCULL_QUANTUM;
+int scull_qset = SCULL_QSET;
+
+struct scull_dev *scull_devices;
+
 // 设备方法
 struct file_operations scull_fops {
 	.owner = THIS_MODULE;
@@ -106,6 +117,38 @@ int scull_trim(struct scull_dev *dev)
 	return 0;
 }
 
+// 实现文件偏移操作
+loff_t scull_llseek(struct file *filp, loff_t off, int whence)
+{
+	struct scull_dev *dev = filp->private_data;
+	loff_t new_pos;
+
+	switch (whence) {
+	case 0:
+		new_pos = off;
+		break;
+	case 1:
+		new_pos = filp->f_pos + off;
+		break;
+	case 2:
+		new_pos = dev->size + off;
+		break;
+	default:
+		return -EINVAL;
+	}
+
+	if (new_pos < 0)
+		return -EINVAL;
+	filp->f_pos = new_pos;
+	return new_pos;
+}
+
+// 实现ioctl方法
+long scull_ioctl(struct file *filp, unsigned int cmd, unsigned long arg)
+{
+	return 0;
+}
+
 // read and write
 ssize_t scull_read(struct file *filp, char __user *buf, size_t count,
 		   loff_t *f_pos)
@@ -145,7 +188,7 @@ ssize_t scull_read(struct file *filp, char __user *buf, size_t count,
 		count = quantum - q_pos;
 	}
 
-	if (cope_to_user(buf, dptr->data[s_pos] + q_pos, count)) {
+	if (copy_to_user(buf, dptr->data[s_pos] + q_pos, count)) {
 		re_val = -EFAULT;
 		goto out;
 	}
@@ -216,16 +259,28 @@ out:
 	return retval;
 }
 
-static int __init scull_init(void)
+static int __init scull_init_module(void)
 {
-	printk(KERN_INFO "Hello, scull!\n");
+	printk(KERN_INFO "Hello, scull_module!\n");
 	return 0;
 }
 
-static void __exit scull_exit(void)
+static void __exit scull_cleanup_module(void)
 {
-	printk(KERN_INFO "Goodbye, scull!\n");
+	int i;
+	dev_t devno = MKDEV(scull_major, scull_minor);
+
+	if (scull_dev) {
+		for (int i = 0; i < scull_nr_devs; ++i) {
+			scull_trim(scull_dev);
+			cdev_del(scull_dev->cdev);
+		}
+		kfree(scull_dev);
+	}
+
+	unregister_chrdev_region(devno);
+
+	printk(KERN_INFO "Goodbye, scull_module!\n");
 }
 
-module_init(scull_init);
-module_exit(scull_exit);
+module_init(scull_init_module) module_exit(scull_cleanup_module)
