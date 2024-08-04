@@ -314,7 +314,7 @@ static void scull_cleanup_module(void)
 
 	if (scull_devices) {
 		for (i = 0; i < scull_nr_devs; ++i) {
-			scull_trim(scull_devices+i);
+			scull_trim(scull_devices + i);
 			cdev_del(&scull_devices[i].cdev);
 		}
 		kfree(scull_devices);
@@ -322,6 +322,7 @@ static void scull_cleanup_module(void)
 
 	unregister_chrdev_region(devno, scull_nr_devs);
 
+	printk(KERN_INFO "scull: module cleanup complete\n");
 	// TODO: call the cleanup functions for friend devices
 }
 
@@ -329,10 +330,11 @@ static void scull_cleanup_module(void)
 static int __init scull_init(void)
 {
 	int result;
+	int i;
 	dev_t dev = 0;
 
 	// 动态分配主设备号
-	result = alloc_chrdev_region(&dev, scull_minor, 1, "scull");
+	result = alloc_chrdev_region(&dev, scull_minor, scull_nr_devs, "scull");
 	scull_major = MAJOR(dev);
 
 	if (result < 0) {
@@ -341,19 +343,22 @@ static int __init scull_init(void)
 	}
 
 	// 分配和初始化设备
-	scull_devices = kmalloc(sizeof(struct scull_dev), GFP_KERNEL);
+	scull_devices =
+		kmalloc(scull_nr_devs * sizeof(struct scull_dev), GFP_KERNEL);
 	if (!scull_devices) {
 		result = -ENOMEM;
 		goto fail;
 	}
-	memset(scull_devices, 0, sizeof(struct scull_dev));
+	memset(scull_devices, 0, scull_nr_devs * sizeof(struct scull_dev));
 
-	scull_devices->quantum = scull_quantum;
-	scull_devices->qset = scull_qset;
-	sema_init(&scull_devices->sem, 1);
-	scull_setup_cdev(scull_devices, 0);
+	for (i = 0; i < scull_nr_devs; ++i) {
+		scull_devices[i].quantum = scull_quantum;
+		scull_devices[i]->qset = scull_qset;
+		sema_init(&scull_devices[i]->sem, 1);
+		scull_setup_cdev(&scull_devices[i], i);
+	}
 
-	printk(KERN_INFO "Hello, scull!\n");
+	printk(KERN_INFO "scull: module loaded\n");
 	return 0;
 
 fail:
@@ -363,10 +368,8 @@ fail:
 
 static void __exit scull_exit(void)
 {
-	cdev_del(&scull_devices->cdev);
-	kfree(scull_devices);
-	unregister_chrdev_region(MKDEV(scull_major, scull_minor), 1);
-	printk(KERN_INFO "Goodbye, scull!\n");
+	scull_cleanup_module();
+	printk(KERN_INFO "scull: module unloaded\n");
 }
 
 module_init(scull_init);
