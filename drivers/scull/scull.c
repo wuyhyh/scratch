@@ -23,23 +23,25 @@ MODULE_VERSION("0.1");
 // 全局变量和宏定义
 #define SCULL_QUANTUM 4000
 #define SCULL_QSET 1000
+#define SCULL_NR_DEVS 4 // 设备数量
 
 int scull_major = 0;
 int scull_minor = 0;
 int scull_quantum = SCULL_QUANTUM;
 int scull_qset = SCULL_QSET;
+int scull_nr_devs = SCULL_NR_DEVS;
 
 struct scull_dev *scull_devices;
 
 // 设备方法
-struct file_operations scull_fops {
-	.owner = THIS_MODULE;
-	.llseek = scull_llseek;
-	.read = scull_read;
-	.write = scull_write;
-	.ioctl = scull_ioctl;
-	.open = scull_open;
-	.release = scull_release;
+struct file_operations scull_fops = {
+	.owner = THIS_MODULE,
+	.llseek = scull_llseek,
+	.read = scull_read,
+	.write = scull_write,
+	.ioctl = scull_ioctl,
+	.open = scull_open,
+	.release = scull_release,
 };
 
 struct scull_qset {
@@ -68,8 +70,9 @@ static void scull_setup_cdev(struct scull_dev *dev, int index)
 	dev->cdev.ops = &scull_fops;
 	err = cdev_add(&dev->cdev, devno, 1);
 
-	if (err)
+	if (err) {
 		printk(KERN_NOTICE "Error %d adding scull%d", err, index);
+	}
 }
 
 int scull_open(struct inode *inode, struct file *filp)
@@ -152,28 +155,29 @@ long scull_ioctl(struct file *filp, unsigned int cmd, unsigned long arg)
 // 实现scull_follow方法
 struct scull_qset *scull_follow(struct scull_dev *dev, int n)
 {
-	struct scull_qset *qs = dev->data;
+	struct scull_qset *qset = dev->data;
 
-	if (!qs) {
-		qs = dev->data = kmalloc(sizeof(struct scull_qset), GFP_KERNEL);
-		if (qs == NULL)
+	if (!qset) {
+		qset = dev->data =
+			kmalloc(sizeof(struct scull_qset), GFP_KERNEL);
+		if (qset == NULL)
 			return NULL;
-		memset(qs, 0, sizeof(struct scull_qset));
+		memset(qset, 0, sizeof(struct scull_qset));
 	}
 
 	while (n--) {
-		if (!qs->next) {
-			qs->next =
+		if (!qset->next) {
+			qset->next =
 				kmalloc(sizeof(struct scull_qset), GFP_KERNEL);
-			if (qs->next == NULL) {
+			if (qset->next == NULL) {
 				return NULL;
 			}
-			memset(qs->next, 0, sizeof(struct scull_qset));
+			memset(qset->next, 0, sizeof(struct scull_qset));
 		}
-		qs = qs->next;
+		qset = qset->next;
 	}
 
-	return qs;
+	return qset;
 }
 
 // read and write
@@ -270,8 +274,8 @@ ssize_t scull_write(struct file *filp, const char __user *buf, size_t count,
 	}
 
 	if (copy_from_user(dptr->data[s_pos] + q_pos, buf, count)) {
-		re_val = -EFAULT;
-		go_to out;
+		reval = -EFAULT;
+		goto out;
 	}
 	*f_pos += count;
 	retval = count;
@@ -286,13 +290,8 @@ out:
 	return retval;
 }
 
-static int __init scull_init_module(void)
-{
-	printk(KERN_INFO "Hello, scull_module!\n");
-	return 0;
-}
-
-static void __exit scull_cleanup_module(void)
+// 实现清除函数
+static void scull_cleanup_module(void)
 {
 	int i;
 	dev_t devno = MKDEV(scull_major, scull_minor);
@@ -310,5 +309,49 @@ static void __exit scull_cleanup_module(void)
 	printk(KERN_INFO "Goodbye, scull_module!\n");
 }
 
-module_init(scull_init_module);
-module_exit(scull_cleanup_module);
+// 初始化和清理代码
+static int __init scull_init(void)
+{
+	int result;
+	dev_t dev = 0;
+
+	// 动态分配主设备号
+	result = alloc_chrdev_region(&dev, scull_minor, 1, "scull");
+	sc_major = MAJOR(dev);
+
+	if (result < 0) {
+		printk(KERNW_WARN, "scull: can't get major number\n");
+		return result;
+	}
+
+	// 分配和初始化设备
+	scull_devices = kmalloc(sizeof(struct scull_dev), GFP_KERNEL);
+	if (!scull_devices) {
+		result = -ENOMEM;
+		goto fail;
+	}
+	memset(scull_devices, 0, sizeof(struct scull_dev));
+
+	scull_devices->quantum = scull_quantum;
+	scull_devices->qset = scull_qset;
+	sema_init(&scull_devices->sem, 1);
+	scull_setup_cdev(scull_devices, 0);
+
+	printk(KERN_INFO "Hello, scull!\n");
+	return 0;
+
+fail:
+	scull_cleanup_module();
+	return result;
+}
+
+static void __exit scull_exit(void)
+{
+	cdev_del(&scull_devices->cdev);
+	kfree(scull_devices);
+	unregister_chrdev_region(MKDEV(scull_major, scull_minor), 1);
+	printk(KERN_INFO "Goodbye, scull!\n");
+}
+
+module_init(scull_init);
+module_exit(scull_exit);
