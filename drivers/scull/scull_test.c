@@ -13,12 +13,13 @@
 #include <string.h>
 #include <errno.h>
 
-#define DEVICE_NAME " /dev/scull0"
+#define DEVICE_NAME "/dev/scull0"
 
 void error_exit(const char *message)
 {
 	perror(message);
-	exit(EXIT_FAILURE);
+	exit(EXIT_
+		     FAILURE);
 }
 
 int main()
