@@ -18,8 +18,7 @@
 void error_exit(const char *message)
 {
 	perror(message);
-	exit(EXIT_
-		     FAILURE);
+	exit(EXIT_FAILURE);
 }
 
 int main()
