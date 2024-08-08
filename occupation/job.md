@@ -8,13 +8,13 @@
 - 教材:操作系统导论
 - JYY wiki & code
 - 参考资料:操作系统设计与实现 [✔️]
+- 参考资料:Unix操作系统设计
 
 ### 内核
 
 - **Linux内核设计与实现** [✔️]
-- **深入理解Linux内核**
+- **深入理解Linux内核** [✔️]
 - **Linux设备驱动程序**
-- Linux kernel documentation
 
 ### 系统编程
 
@@ -97,8 +97,8 @@
 | <p style="text-align:center;">6</p>     | 操作系统设计与实现                                 |                                                         | <p style="text-align:center;color:lightgreen">✔</p> | 一些概念讲得很好                                      |
 | <p style="text-align:center;">7</p>     | Unix设计与实现                                 |                                                         |                                                     | 略读，关注设计哲学                                     |
 | <p style="text-align:center;">8</p>     | Unix网络编程:volume2 IPC                      |                                                         |                                                     |                                               |
-| <p style="text-align:center;">9</p>     | Unix网络编程:volume1 socket API               |                                                         |                                                     |                                               |
-| <p style="text-align:center;">10</p>    | TCP/IP详解:volume1 protocol                 |                                                         |                                                     |                                               |
+| <p style="text-align:center;">9</p>     | TCP/IP详解:volume1 protocol                 |                                                         |                                                     |                                               |
+| <p style="text-align:center;">10</p>    | Unix网络编程:volume1 socket API               |                                                         |                                                     |                                               |
 | <p style="text-align:center;">11</p>    | **InfiniBand Architecture Specification** |                                                         |                                                     |                                               |
 | <p style="text-align:center;">12</p>    | RDMA aware programming manual             |                                                         |                                                     |                                               |
 
