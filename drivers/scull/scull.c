@@ -10,7 +10,7 @@
 #include <linux/module.h>
 #include <linux/kernel.h>
 #include <linux/fs.h>
-#include <linux/slab.h> // 内存管理的函数
+#include <linux/slab.h>	 // 内存管理的函数
 #include <linux/types.h> // 设备号
 #include <linux/cdev.h>
 #include <asm/uaccess.h> // 在内核空间和用户空间之间拷贝数据
@@ -59,20 +59,21 @@ struct file_operations scull_fops = {
 	.release = scull_release,
 };
 
+// 定义量子集（quantum set）结构体，用于存储设备数据
 struct scull_qset {
-	void **data;
-	struct scull_qset *next;
+	void **data; // 指向数据块的指针数组，每个指针指向一段实际的数据
+	struct scull_qset *next; // 指向下一个量子集的指针，形成链表结构
 };
 
-// scull device
+// 定义 scull 设备结构体，表示一个字符设备
 struct scull_dev {
-	struct scull_qset *data;
-	int quantum;
-	int qset;
-	unsigned long size;
-	unsigned int access_key;
-	struct semaphore sem;
-	struct cdev cdev;
+	struct scull_qset *data; // 指向量子集链表的指针，存储设备的所有数据
+	int quantum; // 定义每个量子的大小（以字节为单位）
+	int qset;    // 定义每个量子集包含的量子数量
+	unsigned long size; // 设备中已使用的内存大小（以字节为单位）
+	unsigned int access_key; // 访问密钥（用于控制对设备的访问）
+	struct semaphore sem; // 信号量，用于同步对设备的访问
+	struct cdev cdev; // 字符设备结构体，表示内核中的一个字符设备
 };
 
 static void scull_setup_cdev(struct scull_dev *dev, int index)
@@ -92,7 +93,7 @@ static void scull_setup_cdev(struct scull_dev *dev, int index)
 
 int scull_open(struct inode *inode, struct file *filp)
 {
-	struct scull_dev *dev; // 设备信息
+	struct scull_dev *dev;	  // 设备信息
 
 	dev = container_of(inode->i_cdev, struct scull_dev, cdev);
 	filp->private_data = dev; // for other dev methods
