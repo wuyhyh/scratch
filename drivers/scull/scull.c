@@ -92,6 +92,7 @@ static void scull_setup_cdev(struct scull_dev *dev, int index)
 
 int scull_open(struct inode *inode, struct file *filp)
 {
+	printk
 	struct scull_dev *dev; // 设备信息
 
 	dev = container_of(inode->i_cdev, struct scull_dev, cdev);
