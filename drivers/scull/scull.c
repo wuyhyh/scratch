@@ -92,7 +92,7 @@ static void scull_setup_cdev(struct scull_dev *dev, int index)
 
 int scull_open(struct inode *inode, struct file *filp)
 {
-	printk
+	printk(KERNEL_INFO "scull: open failed\n");
 	struct scull_dev *dev; // 设备信息
 
 	dev = container_of(inode->i_cdev, struct scull_dev, cdev);
@@ -102,6 +102,7 @@ int scull_open(struct inode *inode, struct file *filp)
 		scull_trim(dev);
 	}
 
+	printk(KERN_INFO "scull: open succeeded\n");
 	return 0;
 }
 
