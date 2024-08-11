@@ -15,6 +15,8 @@
 #include <linux/cdev.h>
 #include <asm/uaccess.h> // 在内核空间和用户空间之间拷贝数据
 
+#include "scull.h"
+
 MODULE_LICENSE("GPL");
 MODULE_AUTHOR("wyh");
 MODULE_DESCRIPTION("A simple scull LKM");
@@ -33,17 +35,10 @@ int scull_nr_devs = SCULL_NR_DEVS;
 
 struct scull_dev *scull_devices;
 
-// 函数的声明和定义
-int scull_open(struct inode *inode, struct file *filp);
-int scull_release(struct inode *inode, struct file *filp);
-int scull_trim(struct scull_dev *dev);
-loff_t scull_llseek(struct file *filp, loff_t off, int whence);
-long scull_ioctl(struct file *filp, unsigned int cmd, unsigned long arg);
-struct scull_qset *scull_follow(struct scull_dev *dev, int n);
-ssize_t scull_read(struct file *filp, char __user *buf, size_t count,
-		   loff_t *f_pos);
-ssize_t scull_write(struct file *filp, const char __user *buf, size_t count,
-		    loff_t *f_pos);
+// 静态函数的声明
+static int scull_trim(struct scull_dev *dev); // 释放数据区
+static struct scull_qset *scull_follow(struct scull_dev *dev, int n); // 遍历数据区
+static void scull_setup_cdev(struct scull_dev *dev, int index);
 static void scull_cleanup_module(void);
 static int __init scull_init(void);
 static void __exit scull_exit(void);
@@ -58,83 +53,6 @@ struct file_operations scull_fops = {
 	.open = scull_open,
 	.release = scull_release,
 };
-
-// 定义量子集（quantum set）结构体，用于存储设备数据
-struct scull_qset {
-	void **data; // 指向数据块的指针数组，每个指针指向一段实际的数据
-	struct scull_qset *next; // 指向下一个量子集的指针，形成链表结构
-};
-
-// 定义 scull 设备结构体，表示一个字符设备
-struct scull_dev {
-	struct scull_qset *data; // 指向量子集链表的指针，存储设备的所有数据
-	int quantum; // 定义每个量子的大小（以字节为单位）
-	int qset;    // 定义每个量子集包含的量子数量
-	unsigned long size; // 设备中已使用的内存大小（以字节为单位）
-	unsigned int access_key; // 访问密钥（用于控制对设备的访问）
-	struct semaphore sem; // 信号量，用于同步对设备的访问
-	struct cdev cdev; // 字符设备结构体，表示内核中的一个字符设备
-};
-
-static void scull_setup_cdev(struct scull_dev *dev, int index)
-{
-	int err;
-	int devno = MKDEV(scull_major, scull_minor + index);
-
-	cdev_init(&dev->cdev, &scull_fops);
-	dev->cdev.owner = THIS_MODULE;
-	dev->cdev.ops = &scull_fops;
-	err = cdev_add(&dev->cdev, devno, 1);
-
-	if (err) {
-		printk(KERN_NOTICE "Error %d adding scull%d", err, index);
-	}
-}
-
-int scull_open(struct inode *inode, struct file *filp)
-{
-	struct scull_dev *dev;	  // 设备信息
-
-	dev = container_of(inode->i_cdev, struct scull_dev, cdev);
-	filp->private_data = dev; // for other dev methods
-
-	if ((filp->f_flags & O_ACCMODE) == O_WRONLY) {
-		scull_trim(dev);
-	}
-
-	return 0;
-}
-
-int scull_release(struct inode *inode, struct file *filp)
-{
-	return 0;
-}
-
-// 释放数据区
-int scull_trim(struct scull_dev *dev)
-{
-	struct scull_qset *next, *dptr;
-	int qset = dev->qset;
-	int i;
-
-	for (dptr = dev->data; dptr; dptr = next) {
-		if (dev->data) {
-			for (i = 0; i < qset; i++) {
-				kfree(dptr->data[i]);
-			}
-			kfree(dptr->data);
-			dptr->data = NULL;
-		}
-		next = dptr->next;
-		kfree(dptr);
-	}
-	dev->size = 0;
-	dev->quantum = scull_quantum;
-	dev->qset = scull_qset;
-	dev->data = NULL;
-
-	return 0;
-}
 
 // 实现文件偏移操作
 loff_t scull_llseek(struct file *filp, loff_t off, int whence)
@@ -160,40 +78,6 @@ loff_t scull_llseek(struct file *filp, loff_t off, int whence)
 		return -EINVAL;
 	filp->f_pos = new_pos;
 	return new_pos;
-}
-
-// 实现ioctl方法
-long scull_ioctl(struct file *filp, unsigned int cmd, unsigned long arg)
-{
-	return 0;
-}
-
-// 实现scull_follow方法
-struct scull_qset *scull_follow(struct scull_dev *dev, int n)
-{
-	struct scull_qset *qset = dev->data;
-
-	if (!qset) {
-		qset = dev->data =
-			kmalloc(sizeof(struct scull_qset), GFP_KERNEL);
-		if (qset == NULL)
-			return NULL;
-		memset(qset, 0, sizeof(struct scull_qset));
-	}
-
-	while (n--) {
-		if (!qset->next) {
-			qset->next =
-				kmalloc(sizeof(struct scull_qset), GFP_KERNEL);
-			if (qset->next == NULL) {
-				return NULL;
-			}
-			memset(qset->next, 0, sizeof(struct scull_qset));
-		}
-		qset = qset->next;
-	}
-
-	return qset;
 }
 
 // read and write
@@ -305,6 +189,100 @@ ssize_t scull_write(struct file *filp, const char __user *buf, size_t count,
 out:
 	up(&dev->sem);
 	return retval;
+}
+
+// 实现ioctl方法
+long scull_ioctl(struct file *filp, unsigned int cmd, unsigned long arg)
+{
+	return 0;
+}
+
+int scull_open(struct inode *inode, struct file *filp)
+{
+	struct scull_dev *dev;	  // 设备信息
+
+	dev = container_of(inode->i_cdev, struct scull_dev, cdev);
+	filp->private_data = dev; // for other dev methods
+
+	if ((filp->f_flags & O_ACCMODE) == O_WRONLY) {
+		scull_trim(dev);
+	}
+
+	return 0;
+}
+
+int scull_release(struct inode *inode, struct file *filp)
+{
+	return 0;
+}
+
+// 释放数据区
+static int scull_trim(struct scull_dev *dev)
+{
+	struct scull_qset *next, *dptr;
+	int qset = dev->qset;
+	int i;
+
+	for (dptr = dev->data; dptr; dptr = next) {
+		if (dev->data) {
+			for (i = 0; i < qset; i++) {
+				kfree(dptr->data[i]);
+			}
+			kfree(dptr->data);
+			dptr->data = NULL;
+		}
+		next = dptr->next;
+		kfree(dptr);
+	}
+	dev->size = 0;
+	dev->quantum = scull_quantum;
+	dev->qset = scull_qset;
+	dev->data = NULL;
+
+	return 0;
+}
+
+// 实现scull_follow方法
+static struct scull_qset *scull_follow(struct scull_dev *dev, int n)
+{
+	struct scull_qset *qset = dev->data;
+
+	if (!qset) {
+		qset = dev->data =
+			kmalloc(sizeof(struct scull_qset), GFP_KERNEL);
+		if (qset == NULL)
+			return NULL;
+		memset(qset, 0, sizeof(struct scull_qset));
+	}
+
+	while (n--) {
+		if (!qset->next) {
+			qset->next =
+				kmalloc(sizeof(struct scull_qset), GFP_KERNEL);
+			if (qset->next == NULL) {
+				return NULL;
+			}
+			memset(qset->next, 0, sizeof(struct scull_qset));
+		}
+		qset = qset->next;
+	}
+
+	return qset;
+}
+
+static void scull_setup_cdev(struct scull_dev *dev, int index)
+{
+	int err;
+	int devno = MKDEV(scull_major, scull_minor + index);
+
+	cdev_init(&dev->cdev, &scull_fops);
+	dev->cdev.owner = THIS_MODULE;
+	dev->cdev.ops = &scull_fops;
+	err = cdev_add(&dev->cdev, devno, 1);
+
+	if (err) {
+		printk(KERN_NOTICE "Error %d adding scull%d", err, index);
+	}
 }
 
 // 实现清除函数
