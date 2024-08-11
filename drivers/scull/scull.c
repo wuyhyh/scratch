@@ -92,7 +92,6 @@ static void scull_setup_cdev(struct scull_dev *dev, int index)
 
 int scull_open(struct inode *inode, struct file *filp)
 {
-	printk(KERNEL_INFO "scull: open failed\n");
 	struct scull_dev *dev; // 设备信息
 
 	dev = container_of(inode->i_cdev, struct scull_dev, cdev);
@@ -102,7 +101,6 @@ int scull_open(struct inode *inode, struct file *filp)
 		scull_trim(dev);
 	}
 
-	printk(KERN_INFO "scull: open succeeded\n");
 	return 0;
 }
 
@@ -344,7 +342,8 @@ static int __init scull_init(void)
 		return result;
 	}
 
-	printk(KERN_INFO "scull: registered with major number %d\n",scull_major);
+	printk(KERN_INFO "scull: registered with major number %d\n",
+	       scull_major);
 
 	// 分配和初始化设备
 	scull_devices =
