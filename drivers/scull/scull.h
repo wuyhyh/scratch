@@ -18,7 +18,7 @@ struct scull_qset {
 	struct scull_qset *next;  /* Pointer to the next quantum set in the list. */
 };
 
-// 设备的抽象
+// 设备文件，struct file表示一个打开的文件，而struct inode表示一个磁盘上的文件
 /*
  * The main structure representing a SCULL device.
  */

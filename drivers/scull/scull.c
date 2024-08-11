@@ -43,7 +43,7 @@ static void scull_cleanup_module(void);
 static int __init scull_init(void);
 static void __exit scull_exit(void);
 
-// 设备方法
+// 设备方法：file_operations 结构保存了设备驱动程序的方法
 struct file_operations scull_fops = {
 	.owner = THIS_MODULE,
 	.llseek = scull_llseek,
@@ -270,6 +270,11 @@ static struct scull_qset *scull_follow(struct scull_dev *dev, int n)
 	return qset;
 }
 
+/*
+ * 实现初始化和清除函数
+ * cdev_init() cdev_add() cdev_del() 方法是用来管理字符设备的函数
+ * */
+// 实现初始化函数
 static void scull_setup_cdev(struct scull_dev *dev, int index)
 {
 	int err;
@@ -278,8 +283,8 @@ static void scull_setup_cdev(struct scull_dev *dev, int index)
 	cdev_init(&dev->cdev, &scull_fops);
 	dev->cdev.owner = THIS_MODULE;
 	dev->cdev.ops = &scull_fops;
-	err = cdev_add(&dev->cdev, devno, 1);
 
+	err = cdev_add(&dev->cdev, devno, 1);
 	if (err) {
 		printk(KERN_NOTICE "Error %d adding scull%d", err, index);
 	}
@@ -314,13 +319,11 @@ static int __init scull_init(void)
 
 	// 动态分配主设备号
 	result = alloc_chrdev_region(&dev, scull_minor, scull_nr_devs, "scull");
-	scull_major = MAJOR(dev);
-
 	if (result < 0) {
 		printk(KERN_WARNING, "scull: can't get major number\n");
 		return result;
 	}
-
+	scull_major = MAJOR(dev);
 	printk(KERN_INFO "scull: registered with major number %d\n",
 	       scull_major);
 
