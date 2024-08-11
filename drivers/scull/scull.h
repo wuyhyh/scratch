@@ -10,18 +10,12 @@
 #define SCULL_H
 
 // 设备的数据
-/*
- * The structure representing a quantum set, which is a linked list of data arrays.
- */
 struct scull_qset {
 	void **data;              /* Array of pointers to data blocks. */
 	struct scull_qset *next;  /* Pointer to the next quantum set in the list. */
 };
 
 // 设备文件，struct file表示一个打开的文件，而struct inode表示一个磁盘上的文件
-/*
- * The main structure representing a SCULL device.
- */
 struct scull_dev {
 	struct scull_qset *data;     /* Pointer to the first quantum set. */
 	int quantum;                 /* The size of each quantum (data block). */
