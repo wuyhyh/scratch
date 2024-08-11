@@ -21,4 +21,4 @@ mknod /dev/scull3 c $MAJOR_NUMBER 3
 chmod 666 /dev/scull*
 
 # 显示创建的设备节点
-ls -l /dev | grep scull*
+ls -l /dev | grep scull
