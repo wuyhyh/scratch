@@ -5,31 +5,21 @@
 ### 操作系统
 
 - 蒋炎岩2024操作系统
-- 教材:操作系统导论
+- 教材:**操作系统导论**
 - JYY wiki & code
 - 参考资料:操作系统设计与实现 [✔️]
 - 参考资料:Unix操作系统设计
 
-### 内核
+### 内核和系统编程
 
 - **Linux内核设计与实现** [✔️]
 - **深入理解Linux内核** [✔️]
 - **Linux设备驱动程序**
-
-### 系统编程
-
 - **Unix环境高级编程** [✔️]
-- Unix网络编程卷2:进程间通信
 
 ### 网络
 
-#### ISO模型
-
-- Unix网络编程卷1:socket联网API
-- TCP/IP详解卷1:协议
-
-#### IB和RDMA
-
+- **TCP/IP详解卷1:协议**
 - **InfiniBand Architecture Specification**
 - RDMA杂谈专栏
 - RDMA aware programming manual
@@ -52,6 +42,8 @@
 - Python编程:从入门到实践
 - Progit
 - The Linux Command Line
+- Unix网络编程卷1:socket联网API
+- Unix网络编程卷2:进程间通信
 
 ## 更多技术
 
@@ -96,10 +88,8 @@
 | <p style="text-align:center;">5</p>     | **Unix环境高级编程**                            |                                                         | <p style="text-align:center;color:lightgreen">✔</p> | 系统编程的概念要加深理解                                  |
 | <p style="text-align:center;">6</p>     | 操作系统设计与实现                                 |                                                         | <p style="text-align:center;color:lightgreen">✔</p> | 一些概念讲得很好                                      |
 | <p style="text-align:center;">7</p>     | Unix设计与实现                                 |                                                         |                                                     | 略读，关注设计哲学                                     |
-| <p style="text-align:center;">8</p>     | Unix网络编程:volume2 IPC                      |                                                         |                                                     |                                               |
-| <p style="text-align:center;">9</p>     | TCP/IP详解:volume1 protocol                 |                                                         |                                                     |                                               |
-| <p style="text-align:center;">10</p>    | Unix网络编程:volume1 socket API               |                                                         |                                                     |                                               |
-| <p style="text-align:center;">11</p>    | **InfiniBand Architecture Specification** |                                                         |                                                     |                                               |
-| <p style="text-align:center;">12</p>    | RDMA aware programming manual             |                                                         |                                                     |                                               |
+| <p style="text-align:center;">8</p>     | **TCP/IP详解:volume1 protocol**             |                                                         |                                                     |                                               |
+| <p style="text-align:center;">9</p>     | **InfiniBand Architecture Specification** |                                                         |                                                     |                                               |
+| <p style="text-align:center;">10</p>    | RDMA aware programming manual             |                                                         |                                                     |                                               |                                                                                                 |
 
 
