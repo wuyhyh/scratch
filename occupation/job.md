@@ -6,15 +6,15 @@
 
 - 蒋炎岩2024操作系统
 - **操作系统导论**
-- 操作系统设计与实现 [✔️]
+- 操作系统设计与实现 <l style="color:lightgreen">✔</l>
 - Unix操作系统设计
 
 ### 内核和系统编程
 
-- **Linux内核设计与实现** [✔️]
-- **深入理解Linux内核** [✔️]
+- **Linux内核设计与实现** <l style="color:lightgreen">✔</l>
+- **深入理解Linux内核** <l style="color:lightgreen">✔</l>
 - **Linux设备驱动程序**
-- **Unix环境高级编程** [✔️]
+- **Unix环境高级编程** <l style="color:lightgreen">✔</l>
 
 ### 网络
 
@@ -44,7 +44,7 @@
 
 ### AI
 
-- **ChatGPT**
+- **ChatGPT**（生成式预训练模型的理解与应用）
 
 ### Programming Language
 
@@ -54,23 +54,23 @@
 
 ### C tool chain
 
-- git
-- gcc
-- gdb
-- cmake
-- makefile
-- bash
+- Git
+- GCC
+- GDB
+- CMake
+- Makefile
+- Bash
 
 ### 容器和环境
 
-- docker
-- ubuntu
-- fedora
-- rocky
+- Docker
+- Ubuntu
+- Fedora
+- Rocky Linux
 
 ## 简历与面试
 
-技能和项目经历
+- 技能和项目经历梳理
 
 # process table
 
