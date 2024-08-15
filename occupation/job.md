@@ -49,7 +49,7 @@
 ### Programming Language
 
 - **C**
-- **Python**
+- [**Python**](https://docs.python.org/zh-cn/3/tutorial/index.html)
 - **Markdown**
 
 ### C tool chain
