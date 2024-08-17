@@ -1,3 +1,5 @@
+# Root Makefile
+
 obj-y += drivers/hello/
 obj-y += drivers/scull/
 
