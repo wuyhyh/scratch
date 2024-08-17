@@ -37,3 +37,5 @@ clean:
 	make -C $(KDIR) M=$(PWD) clean
 	@rm -rf build
 	@rm -rf test_scull
+
+# 我们可以假设其他目录不存在，这样利用 scratch 项目构建的内核模块就简单了，没有必要使用单独的构建项目
