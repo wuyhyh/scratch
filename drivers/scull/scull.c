@@ -217,58 +217,80 @@ int scull_release(struct inode *inode, struct file *filp)
 	return 0;
 }
 
-// 释放数据区
+/**
+ * @brief Releases the data area of the scull device.
+ *
+ * This function frees all the memory allocated for the data area of the scull device,
+ * including the quantum sets and the data they point to. It also resets the device's
+ * size, quantum, and qset to their default values.
+ *
+ * @param dev Pointer to the scull device whose data area is to be released.
+ *
+ * @return Always returns 0.
+ */
 static int scull_trim(struct scull_dev *dev)
 {
-	struct scull_qset *next, *dptr;
-	int qset = dev->qset;
-	int i;
+    struct scull_qset *next, *dptr;
+    int qset = dev->qset;
+    int i;
 
-	for (dptr = dev->data; dptr; dptr = next) {
-		if (dev->data) {
-			for (i = 0; i < qset; i++) {
-				kfree(dptr->data[i]);
-			}
-			kfree(dptr->data);
-			dptr->data = NULL;
-		}
-		next = dptr->next;
-		kfree(dptr);
-	}
-	dev->size = 0;
-	dev->quantum = scull_quantum;
-	dev->qset = scull_qset;
-	dev->data = NULL;
+    for (dptr = dev->data; dptr; dptr = next) {
+        if (dev->data) {
+            for (i = 0; i < qset; i++) {
+                kfree(dptr->data[i]);
+            }
+            kfree(dptr->data);
+            dptr->data = NULL;
+        }
+        next = dptr->next;
+        kfree(dptr);
+    }
+    dev->size = 0;
+    dev->quantum = scull_quantum;
+    dev->qset = scull_qset;
+    dev->data = NULL;
 
-	return 0;
+    return 0;
 }
 
-// 实现scull_follow方法
+/**
+ * @brief Traverses the quantum set list of a scull device.
+ *
+ * This function traverses the quantum set list of a scull device to find the
+ * quantum set at the specified index. If the quantum set does not exist, it
+ * allocates memory for it.
+ *
+ * @param dev Pointer to the scull device whose quantum set list is to be traversed.
+ * @param n The index of the quantum set to be found.
+ *
+ * @return Pointer to the quantum set at the specified index, or NULL if memory
+ *         allocation fails.
+ */
 static struct scull_qset *scull_follow(struct scull_dev *dev, int n)
 {
-	struct scull_qset *qset = dev->data;
+    struct scull_qset *qset = dev->data;
 
-	if (!qset) {
-		qset = dev->data =
-			kmalloc(sizeof(struct scull_qset), GFP_KERNEL);
-		if (qset == NULL)
-			return NULL;
-		memset(qset, 0, sizeof(struct scull_qset));
-	}
+    if (!qset) {
+        qset = dev->data =
+            kmalloc(sizeof(struct scull_qset), GFP_KERNEL);
+        if (qset == NULL)
+            return NULL;
+        memset(qset, 0, sizeof(struct scull_qset));
+    }
 
-	while (n--) {
-		if (!qset->next) {
-			qset->next =
-				kmalloc(sizeof(struct scull_qset), GFP_KERNEL);
-			if (qset->next == NULL) {
-				return NULL;
-			}
-			memset(qset->next, 0, sizeof(struct scull_qset));
-		}
-		qset = qset->next;
-	}
+    while (n--) {
+        if (!qset->next) {
+            qset->next =
+                kmalloc(sizeof(struct scull_qset), GFP_KERNEL);
+            if (qset->next == NULL) {
+                return NULL;
+            }
+            memset(qset->next, 0, sizeof(struct scull_qset));
+        }
+        qset = qset->next;
+    }
 
-	return qset;
+    return qset;
 }
 
 /*
