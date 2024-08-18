@@ -36,8 +36,9 @@ int scull_nr_devs = SCULL_NR_DEVS;
 struct scull_dev *scull_devices;
 
 // 静态函数的声明
-static int scull_trim(struct scull_dev *dev); // 释放数据区
-static struct scull_qset *scull_follow(struct scull_dev *dev, int n); // 遍历数据区
+static int scull_trim(struct scull_dev *dev);  // 释放数据区
+static struct scull_qset *scull_follow(struct scull_dev *dev,
+				       int n); // 遍历数据区
 static void scull_setup_cdev(struct scull_dev *dev, int index);
 static void scull_cleanup_module(void);
 static int __init scull_init(void);
@@ -74,7 +75,7 @@ loff_t scull_llseek(struct file *filp, loff_t off, int whence)
 		return -EINVAL;
 	}
 
-	if (new_pos < 0)
+	if (new_pos < 0 || new_pos > dev->size)
 		return -EINVAL;
 	filp->f_pos = new_pos;
 	return new_pos;
