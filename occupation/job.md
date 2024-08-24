@@ -13,7 +13,7 @@
 
 - **Linux内核设计与实现** <l style="color:lightgreen">✔</l>
 - **深入理解Linux内核** <l style="color:lightgreen">✔</l>
-- **Linux设备驱动程序**
+- **Linux设备驱动程序** <l style="color:lightgreen">✔</l>
 - **Unix环境高级编程** <l style="color:lightgreen">✔</l>
 
 ### 网络
@@ -49,6 +49,7 @@
 ### Programming Language
 
 - **C**
+- **Rust**
 - [**Python**](https://docs.python.org/zh-cn/3/tutorial/index.html)
 - **Markdown**
 
