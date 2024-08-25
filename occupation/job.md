@@ -86,3 +86,5 @@
 | <p style="text-align:center;">7</p>     | Unix设计与实现                                 |                                                         |                                                     | 略读，关注设计哲学                                     |
 | <p style="text-align:center;">8</p>     | **TCP/IP详解:volume1 protocol**             |                                                         |                                                     |                                               |
 | <p style="text-align:center;">9</p>     | **InfiniBand Architecture Specification** |                                                         |                                                     |                                               
+
+知识才是可靠的
