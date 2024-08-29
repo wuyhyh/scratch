@@ -37,8 +37,6 @@
 - 深入理解计算机系统
 - 链接装载与库
 - 计算机程序的构造与解释
-- Unix网络编程卷1:socket联网API
-- Unix网络编程卷2:进程间通信
 
 ## 更多技术
 
@@ -75,16 +73,16 @@
 
 # process table
 
-| <p style="text-align:center;">Index</p> | <p style="text-align:center;">Books</p>   | <p style="text-align:center;">Date</p>                  | <p style="text-align:center;">Check</p>             | <p style="text-align:center;">More detail</p> |
-|-----------------------------------------|-------------------------------------------|---------------------------------------------------------|-----------------------------------------------------|-----------------------------------------------|
-| <p style="text-align:center;">1</p>     | **Linux内核设计与实现**                          | <p style="text-align:center;">-2024/07/03</p>           | <p style="text-align:center;color:lightgreen">✔</p> | 适合快速参考，关注内核编译，补丁，调试                           |
-| <p style="text-align:center;">2</p>     | **深入理解Linux内核**                           | <p style="text-align:center;">2024/07/02-2024/07/31</p> | <p style="text-align:center;color:lightgreen">✔</p> | 细节信息很多，关注数据结构                                 |
-| <p style="text-align:center;">3</p>     | **Linux设备驱动程序**                           |                                                         |                                                     |                                               |
-| <p style="text-align:center;">4</p>     | **操作系统导论**                                |                                                         |                                                     | 编写代码，结合jyy的课程，融汇贯通linux内核                     |
-| <p style="text-align:center;">5</p>     | **Unix环境高级编程**                            |                                                         | <p style="text-align:center;color:lightgreen">✔</p> | 系统编程的概念要加深理解                                  |
-| <p style="text-align:center;">6</p>     | 操作系统设计与实现                                 |                                                         | <p style="text-align:center;color:lightgreen">✔</p> | 一些概念讲得很好                                      |
-| <p style="text-align:center;">7</p>     | Unix设计与实现                                 |                                                         |                                                     | 略读，关注设计哲学                                     |
-| <p style="text-align:center;">8</p>     | **TCP/IP详解:volume1 protocol**             |                                                         |                                                     |                                               |
-| <p style="text-align:center;">9</p>     | **InfiniBand Architecture Specification** |                                                         |                                                     |                                               
+| <p style="text-align:center;">Index</p> | <p style="text-align:center;">Books</p>   | <p style="text-align:center;">Date</p>                  | <p style="text-align:center;">Check</p>             | <p style="text-align:center;">More detail</p>           |
+|-----------------------------------------|-------------------------------------------|---------------------------------------------------------|-----------------------------------------------------|---------------------------------------------------------|
+| <p style="text-align:center;">1</p>     | **Linux内核设计与实现**                          | <p style="text-align:center;">-2024/07/03</p>           | <p style="text-align:center;color:lightgreen">✔</p> | 适合快速参考，关注内核编译，补丁，调试                                     |
+| <p style="text-align:center;">2</p>     | **深入理解Linux内核**                           | <p style="text-align:center;">2024/07/02-2024/07/31</p> | <p style="text-align:center;color:lightgreen">✔</p> | 细节信息很多，关注数据结构                                           |
+| <p style="text-align:center;">3</p>     | **Linux设备驱动程序**                           | <p style="text-align:center;">2024/08/01-2024/08/29</p> | <p style="text-align:center;color:lightgreen">✔</p> | 编写字符设备驱动程序 scull, 块设备驱动程序 sbull, 网络设备驱动程序 snull 巩固学习的知识 |
+| <p style="text-align:center;">4</p>     | **操作系统导论**                                |                                                         |                                                     | 编写代码，结合jyy的课程，融汇贯通linux内核                               |
+| <p style="text-align:center;">5</p>     | **Unix环境高级编程**                            |                                                         | <p style="text-align:center;color:lightgreen">✔</p> | 系统编程的概念要加深理解                                            |
+| <p style="text-align:center;">6</p>     | 操作系统设计与实现                                 |                                                         | <p style="text-align:center;color:lightgreen">✔</p> | 一些概念讲得很好                                                |
+| <p style="text-align:center;">7</p>     | Unix设计与实现                                 |                                                         |                                                     | 略读，关注设计哲学                                               |
+| <p style="text-align:center;">8</p>     | **TCP/IP详解:volume1 protocol**             |                                                         |                                                     | 认证学习协议                                                  |
+| <p style="text-align:center;">9</p>     | **InfiniBand Architecture Specification** |                                                         |                                                     | 关注在端系统上实现的协议层：网络层，传输层                                   |     
 
 知识才是可靠的
