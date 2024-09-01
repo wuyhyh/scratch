@@ -4,7 +4,7 @@
 
 ### IB 架构
 
-- [从零学习 InfiniBand-network架构（一） —— IB协议中常用术语及定义](https://www.modb.pro/db/526099)
+- [从零学习 InfiniBand-network架构(一) —— IB协议中常用术语及定义](https://www.modb.pro/db/526099)
 
 - [从零学习 InfiniBand-network架构(二) —— 属性与管理器](https://www.modb.pro/db/526098)
 
@@ -32,6 +32,6 @@
 
 ### CSDN
 
-[【RDMA】技术详解（一）：RDMA概述](https://blog.csdn.net/bandaoyu/article/details/112859853)
+[【RDMA】技术详解(一)：RDMA概述](https://blog.csdn.net/bandaoyu/article/details/112859853)
 
 ### 自己去看 RoCE appendix
