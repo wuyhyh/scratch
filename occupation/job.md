@@ -1,5 +1,7 @@
 # JOB?????????????????
 
+> 知识才是可靠的
+
 ## 阅读
 
 ### 操作系统
@@ -85,4 +87,3 @@
 | <p style="text-align:center;">8</p>     | **TCP/IP详解:volume1 protocol**             |                                                         |                                                     | 认证学习协议                                                  |
 | <p style="text-align:center;">9</p>     | **InfiniBand Architecture Specification** |                                                         |                                                     | 关注在端系统上实现的协议层：网络层，传输层                                   |     
 
-知识才是可靠的
