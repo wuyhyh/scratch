@@ -34,9 +34,6 @@
 
 [【RDMA】技术详解(一)：RDMA概述](https://blog.csdn.net/bandaoyu/article/details/112859853)
 
-### 自己去看 RoCE appendix
-
-
 ### IB specification
 
 - chapter 1 introduction
@@ -47,7 +44,7 @@
 - chapter 6 physical layer interface
 - chapter 7 link layer
 - chapter 8 network layer
-- chapter 9 transport layer 
+- chapter 9 transport layer
 - chapter 10 software transport interface
 
 - chapter 17 channel adapters
@@ -59,4 +56,4 @@
 
 ### Linux 高性能网络详解
 
-RDMA
+第三部分 RDMA
