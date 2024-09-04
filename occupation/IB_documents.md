@@ -1,7 +1,5 @@
 ## 关于 InfiniBand 的一些链接
 
-可以快速了解一些概念
-
 ### IB 架构
 
 - [从零学习 InfiniBand-network架构(一) —— IB协议中常用术语及定义](https://www.modb.pro/db/526099)
@@ -47,9 +45,11 @@
 - chapter 9 transport layer
 - chapter 10 software transport interface
 
+
 - chapter 17 channel adapters
 - chapter 18 switches
 - chapter 19 routers
+
 
 - A8 device management
 - A17 RoCEv2
