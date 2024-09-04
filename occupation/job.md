@@ -9,7 +9,6 @@
 - 蒋炎岩2024操作系统
 - **操作系统导论**
 - 操作系统设计与实现 <l style="color:lightgreen">✔</l>
-- Unix操作系统设计
 
 ### 内核和系统编程
 
@@ -39,6 +38,7 @@
 - 深入理解计算机系统
 - 链接装载与库
 - 计算机程序的构造与解释
+- Unix操作系统设计
 
 ## 更多技术
 
@@ -83,7 +83,5 @@
 | <p style="text-align:center;">4</p>     | **操作系统导论**                                |                                                         |                                                     | 编写代码，结合jyy的课程，融汇贯通linux内核                               |
 | <p style="text-align:center;">5</p>     | **Unix环境高级编程**                            |                                                         | <p style="text-align:center;color:lightgreen">✔</p> | 系统编程的概念要加深理解                                            |
 | <p style="text-align:center;">6</p>     | 操作系统设计与实现                                 |                                                         | <p style="text-align:center;color:lightgreen">✔</p> | 一些概念讲得很好                                                |
-| <p style="text-align:center;">7</p>     | Unix设计与实现                                 |                                                         |                                                     | 略读，关注设计哲学                                               |
-| <p style="text-align:center;">8</p>     | **TCP/IP详解:volume1 protocol**             |                                                         |                                                     | 认证学习协议                                                  |
-| <p style="text-align:center;">9</p>     | **InfiniBand Architecture Specification** |                                                         |                                                     | 关注在端系统上实现的协议层：网络层，传输层                                   |     
-
+| <p style="text-align:center;">7</p>     | **TCP/IP详解:volume1 protocol**             |                                                         |                                                     | 认真学习协议                                                  |
+| <p style="text-align:center;">8</p>     | **InfiniBand Architecture Specification** |                                                         |                                                     | 关注在端系统上实现的协议层：网络层，传输层                                   |     
