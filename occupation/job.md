@@ -21,7 +21,6 @@
 
 - **TCP/IP详解卷1:协议**
 - **InfiniBand Architecture Specification**
-- RDMA杂谈专栏
 - [RDMA aware programming manual v1.7](https://docs.nvidia.com/networking/display/rdmaawareprogrammingv17)
 
 ## 代码
