@@ -7,13 +7,13 @@
         body {
             font-family: Arial, sans-serif;
             background-color: #f0f0f0;
-            margin: 0; /* 移除默认边距 */
+            margin: 0;
             display: flex;
             flex-direction: column;
-            min-height: 100vh; /* 确保页面高度至少为视口高度 */
+            min-height: 100vh;
         }
         .content {
-            flex: 1; /* 使内容区域填充剩余空间 */
+            flex: 1;
         }
         .progress-container {
             width: 80%;
@@ -48,32 +48,39 @@
             text-align: center;
         }
         .update-button {
-            display: block;
-            margin: 0 auto 20px auto; /* 在按钮下方增加间距 */
-            padding: 10px 20px;
-            background-color: #009688;
-            color: #fff;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
+            display: none; /* 隐藏更新按钮，不再需要手动更新 */
         }
-        .update-button:hover {
-            background-color: #00796b;
-        }
-        .value-input {
+        .value-display {
+            font-size: 24px;
+            margin: 0 10px;
             width: 50px;
             text-align: center;
         }
-        .input-group {
-            text-align: center;
+        .button-group {
+            display: flex;
+            justify-content: center;
+            align-items: center;
             margin: 10px 0;
+        }
+        .adjust-button {
+            font-size: 24px;
+            width: 50px;
+            height: 50px;
+            margin: 0 5px;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+            background-color: #009688;
+            color: #fff;
+        }
+        .adjust-button:hover {
+            background-color: #00796b;
         }
         .game-time, .game-start-time {
             text-align: center;
             font-size: 18px;
             margin-top: 10px;
         }
-        /* 新增的版权说明样式 */
         .footer {
             text-align: center;
             font-size: 14px;
@@ -107,23 +114,42 @@
         </div>
     </div>
 
-    <div class="input-group">
-        <label>信任值：<input id="trustInput" class="value-input" type="number" value="0" min="0" max="100"></label>
-        <label>心动值：<input id="heartbeatInput" class="value-input" type="number" value="0" min="0" max="100"></label>
-        <label>感情值：<input id="affectionInput" class="value-input" type="number" value="0" min="0" max="100"></label>
-        <label>积分：<input id="pointsInput" class="value-input" type="number" value="0" min="0" max="5"></label>
+    <!-- 使用加减按钮调整数值 -->
+    <div class="button-group">
+        <button class="adjust-button" onclick="adjustValue('trust', -1)">－</button>
+        <span>信任值：<span id="trustValue" class="value-display">0</span></span>
+        <button class="adjust-button" onclick="adjustValue('trust', 1)">＋</button>
     </div>
-
-    <button class="update-button" onclick="updateProgress()">更新进度</button>
+    <div class="button-group">
+        <button class="adjust-button" onclick="adjustValue('heartbeat', -1)">－</button>
+        <span>心动值：<span id="heartbeatValue" class="value-display">0</span></span>
+        <button class="adjust-button" onclick="adjustValue('heartbeat', 1)">＋</button>
+    </div>
+    <div class="button-group">
+        <button class="adjust-button" onclick="adjustValue('affection', -1)">－</button>
+        <span>感情值：<span id="affectionValue" class="value-display">0</span></span>
+        <button class="adjust-button" onclick="adjustValue('affection', 1)">＋</button>
+    </div>
+    <div class="button-group">
+        <button class="adjust-button" onclick="adjustValue('points', -1)">－</button>
+        <span>积分：<span id="pointsValue" class="value-display">0</span></span>
+        <button class="adjust-button" onclick="adjustValue('points', 1)">＋</button>
+    </div>
 </div>
 
 <!-- 版权说明 -->
 <div class="footer">
-    本游戏一切解释权归 LAT 所有，Powered by WYH.
+    本游戏一切解释权归LAT所有，Powered by WYH.
 </div>
 
 <script>
     var startTime = new Date('2024-09-10T20:09:00');
+
+    // 初始化数值
+    var trustValue = 0;
+    var heartbeatValue = 0;
+    var affectionValue = 0;
+    var pointsValue = 0;
 
     // 显示游戏开始时间
     function displayGameStartTime() {
@@ -161,29 +187,23 @@
             '游戏时间：' + days + '天' + hours + '小时' + minutes + '分钟' + seconds + '秒';
     }
 
+    // 更新进度条和数值显示
     function updateProgress() {
-        var trustValue = parseInt(document.getElementById('trustInput').value);
-        var heartbeatValue = parseInt(document.getElementById('heartbeatInput').value);
-        var affectionValue = parseInt(document.getElementById('affectionInput').value);
-        var pointsValue = parseInt(document.getElementById('pointsInput').value);
-
-        // 确保数值在指定范围内
-        trustValue = Math.min(Math.max(trustValue, 0), 100);
-        heartbeatValue = Math.min(Math.max(heartbeatValue, 0), 100);
-        affectionValue = Math.min(Math.max(affectionValue, 0), 100);
-        pointsValue = Math.min(Math.max(pointsValue, 0), 5);
-
         document.getElementById('trustBar').style.width = trustValue + '%';
         document.getElementById('trustBar').innerText = '信任值：' + trustValue + '%';
+        document.getElementById('trustValue').innerText = trustValue;
 
         document.getElementById('heartbeatBar').style.width = heartbeatValue + '%';
         document.getElementById('heartbeatBar').innerText = '心动值：' + heartbeatValue + '%';
+        document.getElementById('heartbeatValue').innerText = heartbeatValue;
 
         document.getElementById('affectionBar').style.width = affectionValue + '%';
         document.getElementById('affectionBar').innerText = '感情值：' + affectionValue + '%';
+        document.getElementById('affectionValue').innerText = affectionValue;
 
         document.getElementById('pointsBar').style.width = (pointsValue / 5) * 100 + '%';
         document.getElementById('pointsBar').innerText = '积分：' + pointsValue;
+        document.getElementById('pointsValue').innerText = pointsValue;
 
         // 根据规则提示进入下一阶段或其他信息
         if (trustValue >= 100 && heartbeatValue >= 100) {
@@ -198,9 +218,28 @@
         updateGameTime();
     }
 
+    // 调整数值函数
+    function adjustValue(type, amount) {
+        switch(type) {
+            case 'trust':
+                trustValue = Math.min(Math.max(trustValue + amount, 0), 100);
+                break;
+            case 'heartbeat':
+                heartbeatValue = Math.min(Math.max(heartbeatValue + amount, 0), 100);
+                break;
+            case 'affection':
+                affectionValue = Math.min(Math.max(affectionValue + amount, 0), 100);
+                break;
+            case 'points':
+                pointsValue = Math.min(Math.max(pointsValue + amount, 0), 5);
+                break;
+        }
+        updateProgress();
+    }
+
     // 页面加载时，显示游戏开始时间和初始化游戏时间
     displayGameStartTime();
-    updateGameTime();
+    updateProgress();
 
     // 每秒更新一次游戏时间
     setInterval(updateGameTime, 1000);
