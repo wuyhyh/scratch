@@ -122,8 +122,8 @@
 
     <!-- 图片容器 -->
     <div class="image-container">
-        <img src="right-image.png" alt="左侧图片">
-        <img src="left-image.png" alt="右侧图片">
+        <img src="left-image.png" alt="左侧图片">
+        <img src="right-image.png" alt="右侧图片">
     </div>
 
     <div class="progress-container">
@@ -177,6 +177,30 @@
     var heartbeatValue = 0;
     var affectionValue = 0;
     var pointsValue = 0;
+
+    // 从localStorage加载数据
+    function loadData() {
+        if (localStorage.getItem('trustValue')) {
+            trustValue = parseInt(localStorage.getItem('trustValue'));
+        }
+        if (localStorage.getItem('heartbeatValue')) {
+            heartbeatValue = parseInt(localStorage.getItem('heartbeatValue'));
+        }
+        if (localStorage.getItem('affectionValue')) {
+            affectionValue = parseInt(localStorage.getItem('affectionValue'));
+        }
+        if (localStorage.getItem('pointsValue')) {
+            pointsValue = parseInt(localStorage.getItem('pointsValue'));
+        }
+    }
+
+    // 保存数据到localStorage
+    function saveData() {
+        localStorage.setItem('trustValue', trustValue);
+        localStorage.setItem('heartbeatValue', heartbeatValue);
+        localStorage.setItem('affectionValue', affectionValue);
+        localStorage.setItem('pointsValue', pointsValue);
+    }
 
     // 显示游戏开始时间
     function displayGameStartTime() {
@@ -232,6 +256,9 @@
         document.getElementById('pointsBar').innerText = '积分：' + pointsValue;
         document.getElementById('pointsValue').innerText = pointsValue;
 
+        // 保存数据
+        saveData();
+
         // 根据规则提示进入下一阶段或其他信息
         if (trustValue >= 100 && heartbeatValue >= 100) {
             alert('恭喜！进入第二个游戏：恋爱游戏。');
@@ -264,7 +291,8 @@
         updateProgress();
     }
 
-    // 页面加载时，显示游戏开始时间和初始化游戏时间
+    // 页面加载时，加载数据、显示游戏开始时间和初始化游戏时间
+    loadData();
     displayGameStartTime();
     updateProgress();
 
