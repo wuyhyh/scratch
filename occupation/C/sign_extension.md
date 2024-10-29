@@ -25,17 +25,20 @@
 
 示例代码
 
+```c
 #include <stdio.h>
 
-int main() {
-signed char a = -5;          // 8-bit signed char
-int b = a;                   // 32-bit signed int (符号扩展)
+int main()
+{
+	signed char a = -5;    // 8-bit signed char
+	int b = a;	       // 32-bit signed int (符号扩展)
 
-    printf("a = %d\n", a);       // 输出 -5
-    printf("b = %d\n", b);       // 符号扩展后依然输出 -5
+	printf("a = %d\n", a); // 输出 -5
+	printf("b = %d\n", b); // 符号扩展后依然输出 -5
 
-    return 0;
+	return 0;
 }
+```
 
 在这个例子中，a作为8位有符号整数-5，扩展到32位整数时，保持符号位填充，值不变。
 
