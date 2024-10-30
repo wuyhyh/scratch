@@ -68,12 +68,13 @@ virt-install \
 --vcpus 12 \
 --memory 32768 \
 --disk /var/lib/libvirt/images/vm1.qcow2,format=qcow2 \
---cdrom /home/vm/fedora-server-41.iso \
+--location /home/vms/Fedora-Server-dvd-x86_64-41-1.4.iso \
 --network network=default \
 --os-variant fedora-unknown \
+--extra-args "console=ttyS0,115200n8 serial" \
 --graphics none \
---console pty,target_type=serial \
---extra-args 'console=ttyS0,115200n8 serial'
+--console pty,target_type=serial
+
 ```
 
 #### **虚拟机 2 安装**
@@ -84,12 +85,12 @@ virt-install \
 --vcpus 12 \
 --memory 32768 \
 --disk /var/lib/libvirt/images/vm2.qcow2,format=qcow2 \
---cdrom /home/vm/fedora-server-41.iso \
+--location /home/vms/Fedora-Server-dvd-x86_64-41-1.4.iso \
 --network network=default \
 --os-variant fedora-unknown \
+--extra-args "console=ttyS0,115200n8 serial" \
 --graphics none \
---console pty,target_type=serial \
---extra-args 'console=ttyS0,115200n8 serial'
+--console pty,target_type=serial
 ```
 
 **注意：**
