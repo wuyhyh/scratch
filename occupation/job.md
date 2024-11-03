@@ -89,6 +89,4 @@
 | <p style="text-align:center;">8</p>     | **InfiniBand Architecture Specification** |                                                         |                                                     | 关注在端系统上实现的协议层：网络层，传输层                                   |     
 
 ！
-2024/10/12 我被裁员了，猝不及防
-2024/10/25 去深圳做risc-v ?
-
+2024/11/03 机器永远是对的。
