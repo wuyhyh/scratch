@@ -89,6 +89,9 @@
 | <p style="text-align:center;">8</p>     | **InfiniBand Architecture Specification** |                                                         |                                                     | 关注在端系统上实现的协议层：网络层，传输层                                   |     
 
 ！
+2024/10/12
+被裁员
+
 2024/11/03
 jyy
 
@@ -109,3 +112,6 @@ jyy
 回看自己的工作流程了吗？
 
 AI构建学习阶梯
+
+2024/11/05
+左江给了 15.5K
