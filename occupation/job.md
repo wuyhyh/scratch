@@ -132,6 +132,5 @@ AI构建学习阶梯
 新华三
 天翼云
 
-
-
+[用十年的时间学会编程](http://daiyuwen.freeshell.org/gb/misc/21-days-cn.html)
 
